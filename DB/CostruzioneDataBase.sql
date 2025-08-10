@@ -16,7 +16,9 @@ CREATE TABLE DESCRIZIONI (
      Descrizione VARCHAR(20) NOT NULL,
      DescrizioneEng VARCHAR(20) NOT NULL,
      Gruppo VARCHAR(20) NOT NULL,     
-     PRIMARY KEY (Id));
+     PRIMARY KEY (Id),
+     CONSTRAINT des_desIng_grup UNIQUE (Descrizione, DescrizioneEng, Gruppo)
+     );
 
 -- Index Section
 -- _____________ 
