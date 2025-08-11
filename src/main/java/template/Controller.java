@@ -1,9 +1,11 @@
 package template;
 
+import java.util.List;
 import java.util.Objects;
 import org.slf4j.Logger;
 
 import template.model.Model;
+import template.model.api.Description;
 import template.view.View;
 
 public final class Controller {
@@ -30,6 +32,18 @@ public final class Controller {
     public void secondScene() {
         LOGGER.info("Second scene");
         view.goToSecondScene();
+    }
+
+    public Description getDescription(String itaDescription, String engDescription, String group) {
+        LOGGER.info("Getting description for: {}, {}, {}", itaDescription, engDescription, group);
+        return model.getDescription(itaDescription, engDescription, group)
+                .orElseThrow(() -> new IllegalArgumentException("No description found for the provided parameters"));
+    }
+
+    public List<Description> getListDescription() {
+        LOGGER.info("Getting list of descriptions");
+        return model.getListDescription();
+
     }
 }
 

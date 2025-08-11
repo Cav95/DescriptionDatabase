@@ -3,8 +3,14 @@ package template.view.scenes;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
+
+import template.model.api.Description;
 import template.view.View;
 import template.view.utils.GuiFactory;
+import template.view.utils.SelectionTable;
+
+import javax.swing.JTable;
 
 public class WelcomeScene extends JPanel {
 
@@ -26,12 +32,25 @@ public class WelcomeScene extends JPanel {
         this.add(northPanel, BorderLayout.NORTH);
 
         // Center: JTable in JScrollPane
-        String[] columnNames = {"Column 1", "Column 2", "Column 3"};
-        Object[][] data = {
-            {"Row1-Col1", "Row1-Col2", "Row1-Col3"},
-            {"Row2-Col1", "Row2-Col2", "Row2-Col3"}
-        };
-        JTable table = new JTable(data, columnNames);
+        final List<Description> des = view.getController().getListDescription();
+
+        final JTable table = new SelectionTable(
+            des.stream()
+                .map(desc -> new Object[]{
+                    desc.itaDescripion(),
+                    desc.engDescription(),
+                    desc.group()
+                })
+                .toArray(Object[][]::new),
+            new String[]{
+                "ITA", "ING", "GROUP"
+            }
+        );
+        table.setFont(new Font(FONT, Font.PLAIN, 12));
+        table.getColumnModel().getColumn(0).setPreferredWidth(170);
+        table.getColumnModel().getColumn(1).setPreferredWidth(150);
+        table.getColumnModel().getColumn(2).setPreferredWidth(150);
+
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(400, 200));
         this.add(scrollPane, BorderLayout.CENTER);

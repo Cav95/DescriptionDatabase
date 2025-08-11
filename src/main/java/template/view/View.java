@@ -13,6 +13,9 @@ import template.Controller;
 import template.view.scenes.SecondScene;
 import template.view.scenes.WelcomeScene;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 public final class View {
 
     private static final String SN_WELCOME = "welcome";
@@ -25,11 +28,12 @@ public final class View {
     private final JPanel mainPanel;
     private final CardLayout cardLayout;
 
-        public View() {
+    public View(Runnable onClose) {
         this.controller = Optional.empty();
-        this.mainFrame = new JFrame("Porto Morte Nera");
+        this.mainFrame = new JFrame("Description Database");
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       // this.mainFrame.setIconImage(new ImageIcon(ClassLoader.getSystemResource("images/icon.png")).getImage());
+        // this.mainFrame.setIconImage(new
+        // ImageIcon(ClassLoader.getSystemResource("images/icon.png")).getImage());
 
         var screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         final var initWidth = (int) (screenSize.width * FRAME_SIZE_FACTOR);
@@ -41,18 +45,18 @@ public final class View {
         this.mainPanel = new JPanel(cardLayout);
         this.mainFrame.setContentPane(this.mainPanel);
 
-        this.mainPanel.add(new WelcomeScene(this), SN_WELCOME);
+        // this.mainPanel.add(new WelcomeScene(this), SN_WELCOME);
 
         this.mainFrame.setLocationByPlatform(true);
         this.mainFrame.setVisible(true);
 
-       /* this.mainFrame.addWindowListener(
+        this.mainFrame.addWindowListener(
                 new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {
                         onClose.run();
                         System.exit(0);
                     }
-                });*/
+                });
     }
 
     public JFrame getMainFrame() {
@@ -83,10 +87,9 @@ public final class View {
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
 
-     public void goToSecondScene() {
+    public void goToSecondScene() {
         this.mainPanel.add(new SecondScene(this), SN_SECOND);
         this.cardLayout.show(this.mainPanel, SN_SECOND);
     }
-
 
 }
