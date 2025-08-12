@@ -19,6 +19,7 @@ public class SecondScene extends JPanel {
 
     private static final String FONT = "Roboto";
 
+    @SuppressWarnings("unused")
     private final View view;
 
     public SecondScene(View view) {

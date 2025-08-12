@@ -1,6 +1,6 @@
 USE desfusion;
 /* CREAZIONE NUOVA RIGA */
-INSERT INTO DESCRIZIONI (Descrizione, DescrizioneEng ,Gruppo ) VALUES
+INSERT INTO DESCRIZIONI (Descrizione, INGLESE ,Gruppo ) VALUES
 ('NUOVO', 'NEWADD', 'NUOVO');
 
 /*Show all occurence */
@@ -11,13 +11,13 @@ order by Gruppo;
 /*Delete value */
 delete FROM descrizioni
 where Descrizione = 'NUOVO'
-AND DescrizioneEng = 'NEWADD'
+AND INGLESE = 'NEWADD'
 AND Gruppo = 'NUOVO';
 
 /*Modifica Descrizione */
 update descrizioni
 SET Descrizione = 'PIPPO'
-, DescrizioneEng = 'PLUTO'
+, INGLESE = 'PLUTO'
 where Descrizione = 'NUOVO'
-AND DescrizioneEng = 'NEWADD'
+AND INGLESE = 'NEWADD'
 AND Gruppo = 'NUOVO';
