@@ -17,9 +17,11 @@ public interface DescriptionDAO {
 
     List<Description> getListDescription() ;
 
+    void addDescription(String itaDescription, String engDescription, String group);
+
     void deleteDescription(String itaDescription, String engDescription, String group);
 
     void fixDescription(String exItaDescription, String exEngDescription, String exGroup, String newItaDescription,
-            String newEngDescription, String newGroup);
+            String newEngDescription);
 
 }

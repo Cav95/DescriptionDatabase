@@ -49,9 +49,8 @@ public class DescriptionDAOImpl implements DescriptionDAO {
     public List<Description> getListDescription() {
         List<Description> descriptions = new ArrayList<>();
         try (
-            var statement = DAOUtils.prepare(connection, Queries.GET_ALL_TABLE);
-            var resultSet = statement.executeQuery();
-        ) {
+                var statement = DAOUtils.prepare(connection, Queries.GET_ALL_TABLE);
+                var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 descriptions.add(new Description(resultSet.getString(DescriptionColumnName.ITA_DES.getColumnName()),
                         resultSet.getString(DescriptionColumnName.ENG_DES.getColumnName()),
@@ -61,20 +60,45 @@ public class DescriptionDAOImpl implements DescriptionDAO {
             throw new DAOException(e);
         }
         return descriptions;
-        
+
+    }
+
+    @Override
+    public void addDescription(String itaDescription, String engDescription, String group) {
+        {
+            try (
+                    var statement = DAOUtils.prepare(connection, Queries.INSERT_ONE_DES, itaDescription, engDescription,
+                            group);) {
+                statement.executeUpdate();
+            } catch (Exception e) {
+                throw new DAOException(e);
+            }
+        }
     }
 
     @Override
     public void deleteDescription(String itaDescription, String engDescription, String group) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteDescription'");
+
+        try (
+                var statement = DAOUtils.prepare(connection, Queries.DELETE_ONE_DES, itaDescription, engDescription,
+                        group);) {
+            statement.executeUpdate();
+        } catch (Exception e) {
+            throw new DAOException(e);
+        }
+
     }
 
     @Override
     public void fixDescription(String exItaDescription, String exEngDescription, String exGroup,
-            String newItaDescription, String newEngDescription, String newGroup) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'fixDescription'");
-    }
+            String newItaDescription, String newEngDescription) {
+        try (
+                var statement = DAOUtils.prepare(connection, Queries.update_ONE_DES,
+                        newItaDescription, newEngDescription, exItaDescription, exEngDescription, exGroup);) {
+            statement.executeUpdate();
+        } catch (Exception e) {
+            throw new DAOException(e);
+        }
 
+    }
 }
