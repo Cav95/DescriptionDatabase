@@ -69,7 +69,7 @@ public class AddDescriptionScene extends JPanel {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         view.getController().addDescription(
-                                new Description(itaLabel.getText(), engLabel.getText(), groupLabel.getText()));
+                                new Description(itaTextField.getText(), engTextField.getText(), groupTextField.getText()));
                     }
                 }));
         mainPanel.add(GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, Font.getFont(FONT), new ActionListener() {
