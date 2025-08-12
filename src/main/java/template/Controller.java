@@ -34,6 +34,11 @@ public final class Controller {
         view.goToSecondScene();
     }
 
+        public void addScene() {
+        LOGGER.info("Add scene");
+        view.goToAddScene();
+    }
+
     public Description getDescription(String itaDescription, String engDescription, String group) {
         LOGGER.info("Getting description for: {}, {}, {}", itaDescription, engDescription, group);
         return model.getDescription(itaDescription, engDescription, group)
@@ -44,6 +49,11 @@ public final class Controller {
         LOGGER.info("Getting list of descriptions");
         return model.getListDescription();
 
+    }
+
+    public void addDescription(Description description) {
+        LOGGER.info("Adding description: {}", description);
+        model.addDescription(description);
     }
 }
 

@@ -31,5 +31,10 @@ public final class Model {
             return descriptionDAO.getListDescription();
 
     }
+
+    public void addDescription(Description description) {
+        descriptionDAO.addDescription(description.itaDescripion(),
+                description.engDescription(), description.group());
+    }
  
 }

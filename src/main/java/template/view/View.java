@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import template.Controller;
+import template.view.scenes.AddDescriptionScene;
 import template.view.scenes.SecondScene;
 import template.view.scenes.WelcomeScene;
 
@@ -20,6 +21,7 @@ public final class View {
 
     private static final String SN_WELCOME = "welcome";
     private static final String SN_SECOND = "SecondScene";
+    private static final String ADD_SCENE = "addScene";
 
     private static final double FRAME_SIZE_FACTOR = 0.8;
 
@@ -85,6 +87,10 @@ public final class View {
     public void goToInitialScene() {
         this.mainPanel.add(new WelcomeScene(this), SN_WELCOME);
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
+    }
+        public void goToAddScene() {
+        this.mainPanel.add(new AddDescriptionScene(this), ADD_SCENE);
+        this.cardLayout.show(this.mainPanel, ADD_SCENE);
     }
 
     public void goToSecondScene() {
