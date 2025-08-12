@@ -12,28 +12,28 @@ public final class Queries {
             SELECT *
             FROM descrizioni
             where Descrizione = ?
-            AND DescrizioneEng = ?
+            AND INGLESE = ?
             AND Gruppo = ?;
                         """;
 
     public static final String INSERT_ONE_DES = """
-            INSERT INTO DESCRIZIONI (Descrizione, DescrizioneEng ,Gruppo ) VALUES
+            INSERT INTO DESCRIZIONI (Descrizione, INGLESE ,Gruppo ) VALUES
             (?, ?, ?);
                         """;
 
     public static final String DELETE_ONE_DES = """
                         delete FROM descrizioni
             where Descrizione = ?
-            AND DescrizioneEng = ?
+            AND INGLESE = ?
             AND Gruppo = ?;
                                     """;
 
     public static final String update_ONE_DES = """
                                    update descrizioni
             SET Descrizione = ?
-            , DescrizioneEng = ?
+            , INGLESE = ?
             where Descrizione = ?
-            AND DescrizioneEng = ?
+            AND INGLESE = ?
             AND Gruppo = ?;
                                                 """;
 

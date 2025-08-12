@@ -45,7 +45,7 @@ public final class View {
         this.mainPanel = new JPanel(cardLayout);
         this.mainFrame.setContentPane(this.mainPanel);
 
-        // this.mainPanel.add(new WelcomeScene(this), SN_WELCOME);
+        this.mainPanel.add(new SecondScene(this), SN_SECOND);
 
         this.mainFrame.setLocationByPlatform(true);
         this.mainFrame.setVisible(true);

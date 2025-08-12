@@ -22,15 +22,15 @@ public final class App {
         }
 
         var model = new Model(connection);
-                var view = new View(() -> {
+        var view = new View(() -> {
             try {
                 connection.close();
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         });
         var controller = new Controller(model, view);
         view.setController(controller);
-        view.goToInitialScene();
-        //controller.initialScene();
+       // view.goToInitialScene();
+        // controller.initialScene();
     }
 }
-

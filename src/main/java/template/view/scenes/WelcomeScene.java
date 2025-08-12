@@ -54,7 +54,7 @@ public class WelcomeScene extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(400, 200));
         this.add(scrollPane, BorderLayout.CENTER);
-
+        
         // South: Panel with 4 buttons
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));

@@ -1,8 +1,8 @@
 package template.data.api.dao;
 
 public enum DescriptionColumnName {
-    ITA_DES("Descrizione"),
-    ENG_DES("DescrizioneEng"),
+    ITA_DES("DESCRIZIONE"),
+    ENG_DES("INGLESE"),
     GROUP("Gruppo");
 
     private final String columnName;
