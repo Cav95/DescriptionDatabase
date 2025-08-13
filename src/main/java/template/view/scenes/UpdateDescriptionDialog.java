@@ -65,19 +65,19 @@ public class UpdateDescriptionDialog extends JDialog {
                 mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
                 JLabel itaLabel = new JLabel("ITA Description:");
                 JLabel engLabel = new JLabel("ENG Description:");
-               // JLabel groupLabel = new JLabel("Group:");
+                // JLabel groupLabel = new JLabel("Group:");
 
                 JTextField itaTextField = GuiFactory.getTextField(20);
                 JTextField engTextField = GuiFactory.getTextField(20);
-               // JTextField groupTextField = GuiFactory.getTextField(20);
+                // JTextField groupTextField = GuiFactory.getTextField(20);
                 mainPanel.add(itaLabel);
                 mainPanel.add(itaTextField);
 
                 mainPanel.add(engLabel);
                 mainPanel.add(engTextField);
 
-              //  mainPanel.add(groupLabel);
-              //  mainPanel.add(groupTextField);
+                // mainPanel.add(groupLabel);
+                // mainPanel.add(groupTextField);
                 this.add(mainPanel, BorderLayout.CENTER);
 
                 // Correggi il nome del pannello
@@ -92,10 +92,13 @@ public class UpdateDescriptionDialog extends JDialog {
                         public void actionPerformed(final ActionEvent e) {
                                 try {
                                         view.getController().updateDescription(new Description(exIta, exEng, exGroup),
-                                                        new Description(itaTextField.getText(),
-                                                                        engTextField.getText(), exGroup));
+                                                        new Description(itaTextField.getText().toUpperCase(),
+                                                                        engTextField.getText().toUpperCase(), exGroup));
                                         JOptionPane.showMessageDialog(UpdateDescriptionDialog.this,
-                                                        "Description updated successfully!");
+                                                        "Description updated successfully!\n"
+                                                                        + itaTextField.getText().toUpperCase() + " - "
+                                                                        + engTextField.getText().toUpperCase() + " - "
+                                                                        + exGroup);
                                         view.getController().initialScene();
                                         UpdateDescriptionDialog.this.dispose();
 

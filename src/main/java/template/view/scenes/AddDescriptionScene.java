@@ -71,14 +71,20 @@ public class AddDescriptionScene extends JPanel {
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         try {
                             view.getController().addDescription(
-                                new Description(itaTextField.getText(), engTextField.getText(), groupTextField.getText()));
+                                    new Description(itaTextField.getText().toUpperCase(),
+                                            engTextField.getText().toUpperCase(),
+                                            groupTextField.getText().toUpperCase()));
+                            JOptionPane.showMessageDialog(AddDescriptionScene.this,
+                                    "Descrizione Aggiunta con Successo\n" + itaTextField.getText().toUpperCase() + " - "
+                                            + engTextField.getText().toUpperCase() + " - "
+                                            + groupTextField.getText().toUpperCase());
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(AddDescriptionScene.this,
                                     "Errore Descrizione Già Presente ");
                         } finally {
                             view.getController().initialScene();
                         }
-                        
+
                     }
                 }));
         mainPanel.add(GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, Font.getFont(FONT), new ActionListener() {
