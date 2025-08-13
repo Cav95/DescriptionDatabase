@@ -49,12 +49,12 @@ public class LogInScene extends JPanel {
                 if (Arrays.asList(UserAdmit.values()).stream()
                         .filter(t -> t.getName().equals(System.getProperty("user.name")))
                         .findFirst().isPresent()) {
-                    view.getController().initialScene();
+                    view.getController().initialScene(true);
                 } else {
                     JOptionPane.showMessageDialog(view.getMainFrame(), "Accesso negato", "Errore",
                             JOptionPane.ERROR_MESSAGE);
                 }
-                view.getController().initialScene();
+               // view.getController().initialScene();
             }
         }));
 
