@@ -22,9 +22,9 @@ public final class Controller {
         this.model = model;
     }
 
-    public void initialScene() {
+    public void initialScene(Boolean isSaved) {
         LOGGER.info("Initial scene");
-        view.goToInitialScene();
+        view.goToInitialScene(isSaved);
 
     }
 

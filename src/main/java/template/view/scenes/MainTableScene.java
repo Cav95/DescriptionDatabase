@@ -12,14 +12,20 @@ import template.view.utils.GuiFactory;
 import template.view.utils.SelectionTable;
 
 public class MainTableScene extends JPanel {
-    //private static final int TIME_TO_LAMP = 6; // Example value, adjust as needed
+    // private static final int TIME_TO_LAMP = 6; // Example value, adjust as needed
     private static final String FONT = "Roboto";
+
+    private static final long serialVersionUID = 1L;
+
+    private boolean isSaved;
+
 
     @SuppressWarnings("unused")
     private final View view;
 
-    public MainTableScene(View view) {
+    public MainTableScene(View view , boolean isSaved) {
         this.view = view;
+        this.isSaved = isSaved; // Initialize as saved
         this.setLayout(new BorderLayout());
 
         // North: Title panel
@@ -65,7 +71,13 @@ public class MainTableScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        view.getController().addScene();
+                        try {
+                            view.getController().addScene();
+                           // isSaved = false; // Mark as not saved after adding
+                        } catch (Exception ex) {
+
+                        }
+
                     }
                 });
         JButton DeleteButtom = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, Font.getFont(FONT),
@@ -78,8 +90,8 @@ public class MainTableScene extends JPanel {
                             String ita = (String) table.getValueAt(selectedRow, 1);
                             String eng = (String) table.getValueAt(selectedRow, 2);
                             view.getController().deleteDescription(new Description(ita, eng, group));
-                            view.getController().initialScene();
-                            ;
+                            view.getController().initialScene(false);
+                          //  isSaved = false; // Mark as not saved after deletion
                         } else {
                             throw new IllegalStateException("No request selected for management");
                         }
@@ -94,7 +106,8 @@ public class MainTableScene extends JPanel {
                             String group = (String) table.getValueAt(selectedRow, 0);
                             String ita = (String) table.getValueAt(selectedRow, 1);
                             String eng = (String) table.getValueAt(selectedRow, 2);
-                            UpdateDescriptionDialog dialog = new UpdateDescriptionDialog(view, "Update description", ita, eng, group);
+                            UpdateDescriptionDialog dialog = new UpdateDescriptionDialog(view, "Update description",
+                                    ita, eng, group);
                             dialog.setVisible(true);
 
                         } else {
@@ -109,9 +122,39 @@ public class MainTableScene extends JPanel {
                         try {
                             view.getController().save();
                             JOptionPane.showMessageDialog(MainTableScene.this, "Changes saved successfully!");
+                           // isSaved = true; // Mark as saved after successful save
                         } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(MainTableScene.this, "Error saving changes: " + ex.getMessage(),
+                            JOptionPane.showMessageDialog(MainTableScene.this,
+                                    "Error saving changes: " + ex.getMessage(),
                                     "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                });
+        JButton exit = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (isSaved) {
+                            view.exitApplication();
+                        } else {
+
+                            int response = JOptionPane.showConfirmDialog(
+                                    null,
+                                    "Do you want to save?",
+                                    "Save Confirmation",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (response == JOptionPane.YES_OPTION) {
+                                // User chose to save
+                                view.getController().save();
+                                JOptionPane.showMessageDialog(MainTableScene.this, "Changes saved successfully!");
+                            } else {
+                                // User chose not to save
+                                view.exitApplication();
+                                JOptionPane.showMessageDialog(MainTableScene.this,
+                                        "Changes discarded. Exiting application.");
+                            }
+                            view.exitApplication();
+
                         }
                     }
                 });
@@ -120,6 +163,7 @@ public class MainTableScene extends JPanel {
         southPanel.add(DeleteButtom);
         southPanel.add(UpdateButtom);
         southPanel.add(Save);
+        southPanel.add(exit);
         this.add(southPanel, BorderLayout.SOUTH);
     }
 }

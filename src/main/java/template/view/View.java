@@ -33,7 +33,7 @@ public final class View {
     public View(Runnable onClose) {
         this.controller = Optional.empty();
         this.mainFrame = new JFrame("Description Database");
-        this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         // this.mainFrame.setIconImage(new
         // ImageIcon(ClassLoader.getSystemResource("images/icon.png")).getImage());
 
@@ -84,9 +84,12 @@ public final class View {
         this.controller = Optional.of(controller);
     }
 
-    public void goToInitialScene() {
-        this.mainPanel.add(new MainTableScene(this), SN_WELCOME);
+    public void goToInitialScene(Boolean isSaved) {
+        this.mainPanel.add(new MainTableScene(this , isSaved), SN_WELCOME);
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
+    }
+        public void exitApplication() {
+        System.exit(0);
     }
         public void goToAddScene() {
         this.mainPanel.add(new AddDescriptionScene(this), ADD_SCENE);

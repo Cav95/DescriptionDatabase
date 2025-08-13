@@ -1,7 +1,8 @@
 package template.view.utils;
 
 public enum UserAdmit {
-    CAVINAM("mcavina");
+    CAVINAM("mcavina"),
+    MATTI("matti");
 
     private final String name;
 

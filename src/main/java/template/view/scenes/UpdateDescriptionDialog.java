@@ -32,6 +32,8 @@ public class UpdateDescriptionDialog extends JDialog {
         private final String exEng;
         private final String exGroup;
 
+        private boolean isUpdated = false;
+
         /**
          * Constructor for ResultPane.
          * 
@@ -104,7 +106,8 @@ public class UpdateDescriptionDialog extends JDialog {
                                                                         + itaTextField.getText().toUpperCase() + " - "
                                                                         + engTextField.getText().toUpperCase() + " - "
                                                                         + exGroup);
-                                        view.getController().initialScene();
+                                        isUpdated = true; // Mark as updated
+                                        view.getController().initialScene(false);
                                         UpdateDescriptionDialog.this.dispose();
 
                                 } catch (Exception ex) {
@@ -115,6 +118,10 @@ public class UpdateDescriptionDialog extends JDialog {
 
                 });
                 bottomPanel.add(update);
+        }
+
+        public boolean isUpdated() {
+            return isUpdated;
         };
 
 }
