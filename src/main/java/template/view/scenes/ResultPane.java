@@ -65,19 +65,19 @@ public class ResultPane extends JDialog {
                 mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
                 JLabel itaLabel = new JLabel("ITA Description:");
                 JLabel engLabel = new JLabel("ENG Description:");
-                JLabel groupLabel = new JLabel("Group:");
+               // JLabel groupLabel = new JLabel("Group:");
 
                 JTextField itaTextField = GuiFactory.getTextField(20);
                 JTextField engTextField = GuiFactory.getTextField(20);
-                JTextField groupTextField = GuiFactory.getTextField(20);
+               // JTextField groupTextField = GuiFactory.getTextField(20);
                 mainPanel.add(itaLabel);
                 mainPanel.add(itaTextField);
 
                 mainPanel.add(engLabel);
                 mainPanel.add(engTextField);
 
-                mainPanel.add(groupLabel);
-                mainPanel.add(groupTextField);
+              //  mainPanel.add(groupLabel);
+              //  mainPanel.add(groupTextField);
                 this.add(mainPanel, BorderLayout.CENTER);
 
                 // Correggi il nome del pannello
@@ -96,6 +96,8 @@ public class ResultPane extends JDialog {
                                                                         engTextField.getText(), exGroup));
                                         JOptionPane.showMessageDialog(ResultPane.this,
                                                         "Description updated successfully!");
+                                        view.getController().initialScene();
+                                        ResultPane.this.dispose();
 
                                 } catch (Exception ex) {
                                         JOptionPane.showMessageDialog(ResultPane.this,

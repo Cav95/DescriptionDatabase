@@ -94,7 +94,8 @@ public class WelcomeScene extends JPanel {
                             String group = (String) table.getValueAt(selectedRow, 0);
                             String ita = (String) table.getValueAt(selectedRow, 1);
                             String eng = (String) table.getValueAt(selectedRow, 2);
-                            new ResultPane(view, "Update description", ita, eng, group);
+                            ResultPane dialog = new ResultPane(view, "Update description", ita, eng, group);
+                            dialog.setVisible(true);
 
                         } else {
                             throw new IllegalStateException("No request selected for management");
