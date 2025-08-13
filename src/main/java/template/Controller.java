@@ -26,7 +26,6 @@ public final class Controller {
         LOGGER.info("Initial scene");
         view.goToInitialScene();
 
-
     }
 
     public void secondScene() {
@@ -34,7 +33,7 @@ public final class Controller {
         view.goToSecondScene();
     }
 
-        public void addScene() {
+    public void addScene() {
         LOGGER.info("Add scene");
         view.goToAddScene();
     }
@@ -55,6 +54,14 @@ public final class Controller {
         LOGGER.info("Adding description: {}", description);
         model.addDescription(description);
     }
+
+    public void deleteDescription(Description description) {
+        LOGGER.info("Delete description: {}", description);
+        model.deleteDescription(description);
+    }
+
+    public void updateDescription(Description oldDescription, Description newDescription) {
+        LOGGER.info("Updating description from: {}, {}, {} to: {}, {}, {}", oldDescription, newDescription);
+        model.updateDescription(oldDescription, newDescription);
+    }
 }
-
-

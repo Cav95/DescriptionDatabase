@@ -90,7 +90,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
     }
 
     @Override
-    public void fixDescription(String exItaDescription, String exEngDescription, String exGroup,
+    public void updateDescription(String exItaDescription, String exEngDescription, String exGroup,
             String newItaDescription, String newEngDescription) {
         try (
                 var statement = DAOUtils.prepare(connection, Queries.update_ONE_DES,

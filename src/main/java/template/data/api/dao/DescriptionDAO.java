@@ -21,7 +21,7 @@ public interface DescriptionDAO {
 
     void deleteDescription(String itaDescription, String engDescription, String group);
 
-    void fixDescription(String exItaDescription, String exEngDescription, String exGroup, String newItaDescription,
+    void updateDescription(String exItaDescription, String exEngDescription, String exGroup, String newItaDescription,
             String newEngDescription);
 
 }

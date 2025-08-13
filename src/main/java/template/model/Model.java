@@ -27,8 +27,9 @@ public final class Model {
     public Optional<Description> getDescription(String itaDescription, String engDescription, String group) {
         return descriptionDAO.getDescription(itaDescription, engDescription, group); // Placeholder return statement
     }
+
     public List<Description> getListDescription() {
-            return descriptionDAO.getListDescription();
+        return descriptionDAO.getListDescription();
 
     }
 
@@ -36,5 +37,13 @@ public final class Model {
         descriptionDAO.addDescription(description.itaDescripion(),
                 description.engDescription(), description.group());
     }
- 
+
+    public void deleteDescription(Description description) {
+        descriptionDAO.deleteDescription(description.itaDescripion(),
+                description.engDescription(), description.group());
+    }
+
+    public void updateDescription(Description oldDescription, Description newDescription) {
+        descriptionDAO.updateDescription(oldDescription.itaDescripion(), oldDescription.engDescription(), oldDescription.group(), newDescription.itaDescripion(), newDescription.engDescription());
+    }
 }

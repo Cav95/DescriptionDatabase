@@ -76,7 +76,7 @@ class TestdescDao {
         var expected = new Description("PIPPO", "PLUTO", "TVB");
         assertEquals(expected, actual);
 
-        descDao.fixDescription("PIPPO", "PLUTO", "TVB","CIAO", "HELLO");
+        descDao.updateDescription("PIPPO", "PLUTO", "TVB","CIAO", "HELLO");
         assertEquals(descDao.getDescription("CIAO", "HELLO", "TVB").get(),
         new Description("CIAO", "HELLO", "TVB"));
     }

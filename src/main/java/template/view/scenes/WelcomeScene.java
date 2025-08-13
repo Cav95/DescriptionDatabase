@@ -2,6 +2,7 @@ package template.view.scenes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import template.view.utils.SelectionTable;
 public class WelcomeScene extends JPanel {
     private static final int TIME_TO_LAMP = 6; // Example value, adjust as needed
     private static final String FONT = "Roboto";
+
     @SuppressWarnings("unused")
     private final View view;
 
@@ -37,13 +39,13 @@ public class WelcomeScene extends JPanel {
         final JTable table = new SelectionTable(
                 des.stream()
                         .map(desc -> new Object[] {
+                                desc.group(),
                                 desc.itaDescripion(),
-                                desc.engDescription(),
-                                desc.group()
+                                desc.engDescription()
                         })
                         .toArray(Object[][]::new),
                 new String[] {
-                        "ITA", "ING", "GROUP"
+                        "GROUP", "ITA", "ING"
                 });
         table.setFont(new Font(FONT, Font.PLAIN, 12));
         table.getColumnModel().getColumn(0).setPreferredWidth(170);
@@ -59,38 +61,57 @@ public class WelcomeScene extends JPanel {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 
-        JButton button1 = GuiFactory.getButtom("Add scene", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        JButton AddButtom = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
+                    public void actionPerformed(ActionEvent e) {
                         view.getController().addScene();
                     }
                 });
-        JButton button2 = GuiFactory.getButtom("Button 2", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        JButton DeleteButtom = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
-                        // Add your button logic here
+                    public void actionPerformed(ActionEvent e) {
+                        int selectedRow = table.getSelectedRow();
+                        if (selectedRow >= 0) {
+                            String group = (String) table.getValueAt(selectedRow, 0);
+                            String ita = (String) table.getValueAt(selectedRow, 1);
+                            String eng = (String) table.getValueAt(selectedRow, 2);
+                            view.getController().deleteDescription(new Description(ita, eng, group));
+                            view.getController().initialScene();
+                            ;
+                        } else {
+                            throw new IllegalStateException("No request selected for management");
+                        }
                     }
                 });
-        JButton button3 = GuiFactory.getButtom("Button 3", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        JButton UpdateButtom = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
-                        // Add your button logic here
+                    public void actionPerformed(ActionEvent e) {
+                        int selectedRow = table.getSelectedRow();
+                        if (selectedRow >= 0) {
+                            String group = (String) table.getValueAt(selectedRow, 0);
+                            String ita = (String) table.getValueAt(selectedRow, 1);
+                            String eng = (String) table.getValueAt(selectedRow, 2);
+                            new ResultPane(view, "Update description", ita, eng, group);
+
+                        } else {
+                            throw new IllegalStateException("No request selected for management");
+                        }
                     }
                 });
         JButton button4 = GuiFactory.getButtom("Button 4", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
+                    public void actionPerformed(ActionEvent e) {
                         // Add your button logic here
                     }
                 });
         southPanel.add(Box.createHorizontalStrut(10));
-        southPanel.add(button1);
-        southPanel.add(button2);
-        southPanel.add(button3);
+        southPanel.add(AddButtom);
+        southPanel.add(DeleteButtom);
+        southPanel.add(UpdateButtom);
         southPanel.add(button4);
         this.add(southPanel, BorderLayout.SOUTH);
     }
