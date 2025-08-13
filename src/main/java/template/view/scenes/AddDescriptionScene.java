@@ -27,12 +27,6 @@ public class AddDescriptionScene extends JPanel {
 
     public AddDescriptionScene(View view) {
         this.view = view;
-        /*
-         * this.view = view;
-         * this.itaDescription = itaDescription;
-         * this.engDescription = engDescription;
-         * this.group = group;
-         */
 
         this.setLayout(new BorderLayout());
 

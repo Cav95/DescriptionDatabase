@@ -15,6 +15,7 @@ import template.view.View;
 import template.view.utils.GuiFactory;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,6 +26,7 @@ import java.awt.event.ActionListener;
 public class UpdateDescriptionDialog extends JDialog {
 
         private static final long serialVersionUID = 1L;
+        private static final String FONT = "Roboto";
 
         private final String exIta;
         private final String exEng;
@@ -53,12 +55,15 @@ public class UpdateDescriptionDialog extends JDialog {
 
                 this.setLayout(new BorderLayout());
 
-                /*
-                 * final JPanel mainPanel = new JPanel();
-                 * mainPanel.setLayout(new BorderLayout());
-                 * mainPanel.setBorder(BorderFactory.createEmptyBorder(50, 20, 20, 20));
-                 * this.add(mainPanel, BorderLayout.CENTER);
-                 */
+                final JPanel titlePannel = new JPanel();
+                titlePannel.setLayout(new BorderLayout());
+                titlePannel.setBorder(BorderFactory.createEmptyBorder(50, 20, 20, 20));
+                this.add(titlePannel, BorderLayout.NORTH);
+
+                JLabel titleLabel = new JLabel("Stai aggiornando la descrizione: " + group + " - " + ita + " - " + eng);
+                titleLabel.setFont(new Font(FONT, Font.BOLD, 15));
+                titleLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+                titlePannel.add(titleLabel, BorderLayout.CENTER);
 
                 final JPanel mainPanel = new JPanel();
                 mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));

@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 
 public class GuiFactory {
+    public static final String FONT = "Roboto";
 
     static public JButton getButtom(final String name, final Color backgroud, final Color foreGround,
             final Font font, final ActionListener action) {
