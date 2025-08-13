@@ -102,18 +102,24 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        JButton button4 = GuiFactory.getButtom("Button 4", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        JButton Save = GuiFactory.getButtom("Save", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Add your button logic here
+                        try {
+                            view.getController().save();
+                            JOptionPane.showMessageDialog(MainTableScene.this, "Changes saved successfully!");
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(MainTableScene.this, "Error saving changes: " + ex.getMessage(),
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 });
         southPanel.add(Box.createHorizontalStrut(10));
         southPanel.add(AddButtom);
         southPanel.add(DeleteButtom);
         southPanel.add(UpdateButtom);
-        southPanel.add(button4);
+        southPanel.add(Save);
         this.add(southPanel, BorderLayout.SOUTH);
     }
 }

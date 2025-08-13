@@ -20,6 +20,7 @@ public final class App {
             new ConnectionFailureView();
             return;
         }
+        connection.setAutoCommit(false);
 
         var model = new Model(connection);
         var view = new View(() -> {

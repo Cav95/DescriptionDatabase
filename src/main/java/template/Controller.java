@@ -64,4 +64,9 @@ public final class Controller {
         LOGGER.info("Updating description from: {}, {}, {} to: {}, {}, {}", oldDescription, newDescription);
         model.updateDescription(oldDescription, newDescription);
     }
+
+    public void save() {
+        LOGGER.info("Saving changes to the database");
+        model.save();
+    }
 }

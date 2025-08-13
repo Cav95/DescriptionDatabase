@@ -46,4 +46,17 @@ public final class Model {
     public void updateDescription(Description oldDescription, Description newDescription) {
         descriptionDAO.updateDescription(oldDescription.itaDescripion(), oldDescription.engDescription(), oldDescription.group(), newDescription.itaDescripion(), newDescription.engDescription());
     }
+
+    public void save() {
+        try {
+            connection.commit();
+        } catch (Exception e) {
+            try {
+                connection.rollback();
+            } catch (Exception rollbackEx) {
+                throw new RuntimeException("Failed to rollback transaction after commit failure", rollbackEx);
+            }
+            throw new RuntimeException("Failed to commit transaction", e);
+        }
+    }
 }
