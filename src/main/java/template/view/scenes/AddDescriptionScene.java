@@ -3,6 +3,7 @@ package template.view.scenes;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -68,8 +69,16 @@ public class AddDescriptionScene extends JPanel {
                 GuiFactory.getButtom("Aggiungi", Color.GRAY, Color.BLACK, Font.getFont(FONT), new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
-                        view.getController().addDescription(
+                        try {
+                            view.getController().addDescription(
                                 new Description(itaTextField.getText(), engTextField.getText(), groupTextField.getText()));
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(AddDescriptionScene.this,
+                                    "Errore Descrizione Già Presente ");
+                        } finally {
+                            view.getController().initialScene();
+                        }
+                        
                     }
                 }));
         mainPanel.add(GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, Font.getFont(FONT), new ActionListener() {
