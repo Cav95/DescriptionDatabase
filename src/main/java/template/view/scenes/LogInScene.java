@@ -3,10 +3,12 @@ package template.view.scenes;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import template.view.View;
 import template.view.utils.GuiFactory;
+import template.view.utils.UserAdmit;
 
 import java.awt.*;
 
@@ -14,15 +16,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
-public class SecondScene extends JPanel {
+public class LogInScene extends JPanel {
 
     private static final String FONT = "Roboto";
 
     @SuppressWarnings("unused")
     private final View view;
 
-    public SecondScene(View view) {
+    public LogInScene(View view) {
         this.view = view;
         this.setLayout(new BorderLayout());
 
@@ -43,10 +46,18 @@ public class SecondScene extends JPanel {
         mainPanel.add(GuiFactory.getButtom("Accedi", Color.GRAY, Color.BLACK, Font.getFont(FONT), new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                if (Arrays.asList(UserAdmit.values()).stream()
+                        .filter(t -> t.getName().equals(System.getProperty("user.name")))
+                        .findFirst().isPresent()) {
+                    view.getController().initialScene();
+                } else {
+                    JOptionPane.showMessageDialog(view.getMainFrame(), "Accesso negato", "Errore",
+                            JOptionPane.ERROR_MESSAGE);
+                }
                 view.getController().initialScene();
             }
-        } ));
-        
+        }));
+
     }
 
 }

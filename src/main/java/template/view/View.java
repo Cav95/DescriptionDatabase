@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 
 import template.Controller;
 import template.view.scenes.AddDescriptionScene;
-import template.view.scenes.SecondScene;
-import template.view.scenes.WelcomeScene;
+import template.view.scenes.LogInScene;
+import template.view.scenes.MainTableScene;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -47,7 +47,7 @@ public final class View {
         this.mainPanel = new JPanel(cardLayout);
         this.mainFrame.setContentPane(this.mainPanel);
 
-        this.mainPanel.add(new SecondScene(this), SN_SECOND);
+        this.mainPanel.add(new LogInScene(this), SN_SECOND);
 
         this.mainFrame.setLocationByPlatform(true);
         this.mainFrame.setVisible(true);
@@ -85,7 +85,7 @@ public final class View {
     }
 
     public void goToInitialScene() {
-        this.mainPanel.add(new WelcomeScene(this), SN_WELCOME);
+        this.mainPanel.add(new MainTableScene(this), SN_WELCOME);
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
         public void goToAddScene() {
@@ -94,7 +94,7 @@ public final class View {
     }
 
     public void goToSecondScene() {
-        this.mainPanel.add(new SecondScene(this), SN_SECOND);
+        this.mainPanel.add(new LogInScene(this), SN_SECOND);
         this.cardLayout.show(this.mainPanel, SN_SECOND);
     }
 

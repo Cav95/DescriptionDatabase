@@ -11,14 +11,14 @@ import template.view.View;
 import template.view.utils.GuiFactory;
 import template.view.utils.SelectionTable;
 
-public class WelcomeScene extends JPanel {
-    private static final int TIME_TO_LAMP = 6; // Example value, adjust as needed
+public class MainTableScene extends JPanel {
+    //private static final int TIME_TO_LAMP = 6; // Example value, adjust as needed
     private static final String FONT = "Roboto";
 
     @SuppressWarnings("unused")
     private final View view;
 
-    public WelcomeScene(View view) {
+    public MainTableScene(View view) {
         this.view = view;
         this.setLayout(new BorderLayout());
 
@@ -94,7 +94,7 @@ public class WelcomeScene extends JPanel {
                             String group = (String) table.getValueAt(selectedRow, 0);
                             String ita = (String) table.getValueAt(selectedRow, 1);
                             String eng = (String) table.getValueAt(selectedRow, 2);
-                            ResultPane dialog = new ResultPane(view, "Update description", ita, eng, group);
+                            UpdateDescriptionDialog dialog = new UpdateDescriptionDialog(view, "Update description", ita, eng, group);
                             dialog.setVisible(true);
 
                         } else {

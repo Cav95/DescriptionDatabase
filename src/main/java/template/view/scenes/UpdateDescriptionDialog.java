@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
  * ResultPane class that extends JDialog to display the results of the tubular
  * calculations.
  */
-public class ResultPane extends JDialog {
+public class UpdateDescriptionDialog extends JDialog {
 
         private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,7 @@ public class ResultPane extends JDialog {
          * @param removeMode whether to remove the dialog after displaying results
          * @param result     the result string to be displayed
          */
-        public ResultPane(final View view, final String title, String ita, String eng, String group) {
+        public UpdateDescriptionDialog(final View view, final String title, String ita, String eng, String group) {
 
                 super(view.getMainFrame(), title, ModalityType.APPLICATION_MODAL);
                 this.exIta = ita;
@@ -94,13 +94,13 @@ public class ResultPane extends JDialog {
                                         view.getController().updateDescription(new Description(exIta, exEng, exGroup),
                                                         new Description(itaTextField.getText(),
                                                                         engTextField.getText(), exGroup));
-                                        JOptionPane.showMessageDialog(ResultPane.this,
+                                        JOptionPane.showMessageDialog(UpdateDescriptionDialog.this,
                                                         "Description updated successfully!");
                                         view.getController().initialScene();
-                                        ResultPane.this.dispose();
+                                        UpdateDescriptionDialog.this.dispose();
 
                                 } catch (Exception ex) {
-                                        JOptionPane.showMessageDialog(ResultPane.this,
+                                        JOptionPane.showMessageDialog(UpdateDescriptionDialog.this,
                                                         "Errore " + ex.getMessage());
                                 }
                         }
