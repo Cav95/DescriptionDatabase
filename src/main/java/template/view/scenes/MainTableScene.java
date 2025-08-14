@@ -54,8 +54,8 @@ public class MainTableScene extends JPanel {
     public MainTableScene(View view, boolean isSaved, String itaDescription, String engDescription, String group) {
         this.view = view;
         this.isSaved = true; // Initialize as saved
-        this.itaDescription = itaDescription;
-        this.engDescription = engDescription;
+        this.itaDescription = itaDescription + ALL;
+        this.engDescription = engDescription + ALL;
         this.group = group;
 
         this.itaTextField.setText(reversBlankReturn(itaDescription));
