@@ -26,13 +26,19 @@ public class MainTableScene extends JPanel {
     private String engDescription;
     private String group;
 
-    JLabel desFilter = new JLabel("Filtro Descrizione:");
-    JTextField itaTextField = GuiFactory.getTextField(20);
-    JLabel engFilter = new JLabel("Filtro Inglese:");
-    JTextField engTextField = GuiFactory.getTextField(20);
-    JLabel groupFilter = new JLabel("Filtro Gruppo:");
-    List<String> listGroup;
-    JComboBox<String> groupTextField;
+    private JLabel desFilter = new JLabel("Filtro Descrizione:");
+    private JTextField itaTextField = GuiFactory.getTextField(20);
+    private JLabel engFilter = new JLabel("Filtro Inglese:");
+    private JTextField engTextField = GuiFactory.getTextField(20);
+    private JLabel groupFilter = new JLabel("Filtro Gruppo:");
+    private List<String> listGroup;
+    private JComboBox<String> groupTextField;
+
+    private JButton addButton;
+    private JButton deleteButton;
+    private JButton updateButton;
+    private JButton saveButton;
+    private JButton exitButton;
 
     @SuppressWarnings("unused")
     private final View view;
@@ -111,7 +117,7 @@ public class MainTableScene extends JPanel {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 
-        JButton AddButtom = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -124,7 +130,7 @@ public class MainTableScene extends JPanel {
 
                     }
                 });
-        JButton DeleteButtom = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -141,7 +147,7 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        JButton UpdateButtom = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        updateButton = GuiFactory.getButtom("Aggiorna", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -159,7 +165,7 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        JButton Save = GuiFactory.getButtom("Save", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        saveButton = GuiFactory.getButtom("Save", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -174,7 +180,7 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        JButton exit = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        exitButton = GuiFactory.getButtom("Exit", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -203,11 +209,11 @@ public class MainTableScene extends JPanel {
                     }
                 });
         southPanel.add(Box.createHorizontalStrut(10));
-        southPanel.add(AddButtom);
-        southPanel.add(DeleteButtom);
-        southPanel.add(UpdateButtom);
-        southPanel.add(Save);
-        southPanel.add(exit);
+        southPanel.add(addButton);
+        southPanel.add(deleteButton);
+        southPanel.add(updateButton);
+        southPanel.add(saveButton);
+        southPanel.add(exitButton);
 
         // listGroup.add(0, "");
         // this.groupTextField = GuiFactory.getComboBox(listGroup);
