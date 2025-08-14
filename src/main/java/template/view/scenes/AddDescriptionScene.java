@@ -19,7 +19,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
-public class AddDescriptionScene extends JPanel {
+public class AddDescriptionScene extends JOptionPane {
 
     private static final String FONT = "Roboto";
 

@@ -121,12 +121,15 @@ public class MainTableScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        try {
+                        /*try {
                             view.getController().addScene();
                             // isSaved = false; // Mark as not saved after adding
                         } catch (Exception ex) {
 
-                        }
+                        }*/
+                        AddDescriptionScene dialog = new AddDescriptionScene(view);
+                            dialog.setVisible(true);
+
 
                     }
                 });
