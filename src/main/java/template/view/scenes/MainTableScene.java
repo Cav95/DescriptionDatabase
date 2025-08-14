@@ -39,9 +39,9 @@ public class MainTableScene extends JPanel {
     public MainTableScene(View view, boolean isSaved, String itaDescription, String engDescription, String group) {
         this.view = view;
         this.isSaved = true; // Initialize as saved
-        this.itaDescription = "%" + itaDescription + "%";
-        this.engDescription = "%" + engDescription + "%";
-        this.group = "%" + group + "%";
+        this.itaDescription =itaDescription;
+        this.engDescription =engDescription;
+        this.group =group ;
         initial(view, true);
     }
 
@@ -189,14 +189,20 @@ public class MainTableScene extends JPanel {
         JLabel engFilter = new JLabel("Filtro Inglese:");
         JTextField engTextField = GuiFactory.getTextField(20);
         JLabel groupFilter = new JLabel("Filtro Gruppo:");
-        JComboBox<String> groupTextField = GuiFactory.getComboBox(view.getController().getAllGroupTypeString());
+        var listGroup = view.getController().getAllGroupTypeString();
+        listGroup.add(0, "");
+        JComboBox<String> groupTextField = GuiFactory.getComboBox(listGroup);
         JButton filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         String ita = blankReturn(itaTextField);
                         String eng = blankReturn(engTextField);
+                        
                         String group = groupTextField.getSelectedItem().toString().toUpperCase();
+                        if (group.isBlank()) {
+                            group = "%";
+                        }                        
                         view.goToInitialSceneFiltered(isSaved, ita, eng, group);
                     }
                 });
