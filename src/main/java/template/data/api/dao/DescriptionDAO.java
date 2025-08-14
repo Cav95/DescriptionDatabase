@@ -15,13 +15,15 @@ public interface DescriptionDAO {
 
     Optional<Description> getDescription(String itaDescription, String engDescription, String group) throws DAOException;
 
-    List<Description> getListDescription() ;
-
     void addDescription(String itaDescription, String engDescription, String group);
 
     void deleteDescription(String itaDescription, String engDescription, String group);
 
     void updateDescription(String exItaDescription, String exEngDescription, String exGroup, String newItaDescription,
             String newEngDescription);
+
+    List<String> getAllGroupTypeString() throws DAOException;
+
+    List<Description> getListDescription(String itaDescription, String engDescription, String group);
 
 }

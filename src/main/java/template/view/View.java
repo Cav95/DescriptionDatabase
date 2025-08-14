@@ -88,6 +88,10 @@ public final class View {
         this.mainPanel.add(new MainTableScene(this , isSaved), SN_WELCOME);
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
+        public void goToInitialSceneFiltered(Boolean isSaved , String itaDescription, String engDescription, String group) {
+        this.mainPanel.add(new MainTableScene(this , isSaved ,itaDescription , engDescription ,group ), SN_WELCOME);
+        this.cardLayout.show(this.mainPanel, SN_WELCOME);
+    }
         public void exitApplication() {
         System.exit(0);
     }

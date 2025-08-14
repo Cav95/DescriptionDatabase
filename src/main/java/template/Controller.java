@@ -44,9 +44,9 @@ public final class Controller {
                 .orElseThrow(() -> new IllegalArgumentException("No description found for the provided parameters"));
     }
 
-    public List<Description> getListDescription() {
+    public List<Description> getListDescription( String itaDescription, String engDescription, String group) {
         LOGGER.info("Getting list of descriptions");
-        return model.getListDescription();
+        return model.getListDescription(itaDescription, engDescription, group  );
 
     }
 
@@ -68,5 +68,10 @@ public final class Controller {
     public void save() {
         LOGGER.info("Saving changes to the database");
         model.save();
+    }
+
+    public List<String> getAllGroupTypeString() {
+        LOGGER.info("Getting all group types");
+        return model.getAllGroupTypeString();
     }
 }

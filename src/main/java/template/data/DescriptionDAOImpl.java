@@ -46,10 +46,10 @@ public class DescriptionDAOImpl implements DescriptionDAO {
     }
 
     @Override
-    public List<Description> getListDescription() {
+    public List<Description> getListDescription(String itaDescription, String engDescription, String group) {
         List<Description> descriptions = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, Queries.GET_ALL_TABLE);
+                var statement = DAOUtils.prepare(connection, Queries.GET_ALL_TABLE, itaDescription, engDescription, group);
                 var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 descriptions.add(new Description(resultSet.getString(DescriptionColumnName.ITA_DES.getColumnName()),
@@ -93,12 +93,27 @@ public class DescriptionDAOImpl implements DescriptionDAO {
     public void updateDescription(String exItaDescription, String exEngDescription, String exGroup,
             String newItaDescription, String newEngDescription) {
         try (
-                var statement = DAOUtils.prepare(connection, Queries.update_ONE_DES,
+                var statement = DAOUtils.prepare(connection, Queries.UPDATE_ONE_DES,
                         newItaDescription, newEngDescription, exItaDescription, exEngDescription, exGroup);) {
             statement.executeUpdate();
         } catch (Exception e) {
             throw new DAOException(e);
         }
 
+    }
+
+    @Override
+    public List<String> getAllGroupTypeString() throws DAOException {
+        List<String> groupTypes = new ArrayList<>();
+        try (
+                var statement = DAOUtils.prepare(connection, Queries.ALL_GROUP_TYPE_STRING);
+                var resultSet = statement.executeQuery();) {
+            while (resultSet.next()) {
+                groupTypes.add(resultSet.getString(DescriptionColumnName.GROUP.getColumnName()));
+            }
+        } catch (Exception e) {
+            throw new DAOException(e);
+        }
+        return groupTypes;
     }
 }

@@ -3,9 +3,12 @@ package template.data.queries;
 public final class Queries {
 
         public static final String GET_ALL_TABLE = """
-                                        select *
+                        select *
                         from descrizioni
-                        order by Gruppo;
+                        where Descrizione like ?
+                        and INGLESE like ?
+                        and Gruppo like ?
+                        order by 4,2,3;
                                     """;
 
         public static final String GET_ONE_DES = """
@@ -28,13 +31,19 @@ public final class Queries {
                         AND Gruppo = ?;
                                                 """;
 
-        public static final String update_ONE_DES = """
-                                               update descrizioni
-                                                SET Descrizione = ?
-                                                , INGLESE = ?
-                                                where Descrizione = ?
-                                                AND INGLESE = ?
-                                                AND Gruppo = ?;
-                                                            """;
+        public static final String UPDATE_ONE_DES = """
+                        update descrizioni
+                         SET Descrizione = ?
+                         , INGLESE = ?
+                         where Descrizione = ?
+                         AND INGLESE = ?
+                         AND Gruppo = ?;
+                                     """;
+        public static final String ALL_GROUP_TYPE_STRING = """
+                        SELECT DISTINCT Gruppo
+                         FROM descrizioni
+                         WHERE Gruppo IS NOT NULL
+                         ORDER BY Gruppo;
+                                     """;
 
 }

@@ -19,13 +19,33 @@ public class MainTableScene extends JPanel {
 
     private boolean isSaved;
 
+    private String itaDescription;
+    private String engDescription;
+    private String group;
 
     @SuppressWarnings("unused")
     private final View view;
 
-    public MainTableScene(View view , boolean isSaved) {
+    public MainTableScene(View view, boolean isSaved) {
         this.view = view;
         this.isSaved = isSaved; // Initialize as saved
+        this.itaDescription = "%";
+        this.engDescription = "%";
+        this.group = "%";
+        initial(view, isSaved);
+
+    }
+
+    public MainTableScene(View view, boolean isSaved, String itaDescription, String engDescription, String group) {
+        this.view = view;
+        this.isSaved = true; // Initialize as saved
+        this.itaDescription = "%" + itaDescription + "%";
+        this.engDescription = "%" + engDescription + "%";
+        this.group = "%" + group + "%";
+        initial(view, true);
+    }
+
+    private void initial(View view, boolean isSaved) {
         this.setLayout(new BorderLayout());
 
         // North: Title panel
@@ -40,7 +60,7 @@ public class MainTableScene extends JPanel {
 
         // Center: JTable in JScrollPane
 
-        final List<Description> des = view.getController().getListDescription();
+        final List<Description> des = view.getController().getListDescription(itaDescription, engDescription, group);
 
         final JTable table = new SelectionTable(
                 des.stream()
@@ -73,7 +93,7 @@ public class MainTableScene extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             view.getController().addScene();
-                           // isSaved = false; // Mark as not saved after adding
+                            // isSaved = false; // Mark as not saved after adding
                         } catch (Exception ex) {
 
                         }
@@ -91,7 +111,7 @@ public class MainTableScene extends JPanel {
                             String eng = (String) table.getValueAt(selectedRow, 2);
                             view.getController().deleteDescription(new Description(ita, eng, group));
                             view.getController().initialScene(false);
-                          //  isSaved = false; // Mark as not saved after deletion
+                            // isSaved = false; // Mark as not saved after deletion
                         } else {
                             throw new IllegalStateException("No request selected for management");
                         }
@@ -122,7 +142,7 @@ public class MainTableScene extends JPanel {
                         try {
                             view.getController().save();
                             JOptionPane.showMessageDialog(MainTableScene.this, "Changes saved successfully!");
-                           // isSaved = true; // Mark as saved after successful save
+                            // isSaved = true; // Mark as saved after successful save
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(MainTableScene.this,
                                     "Error saving changes: " + ex.getMessage(),
@@ -164,6 +184,51 @@ public class MainTableScene extends JPanel {
         southPanel.add(UpdateButtom);
         southPanel.add(Save);
         southPanel.add(exit);
+        JLabel desFilter = new JLabel("Filtro Descrizione:");
+        JTextField itaTextField = GuiFactory.getTextField(20);
+        JLabel engFilter = new JLabel("Filtro Inglese:");
+        JTextField engTextField = GuiFactory.getTextField(20);
+        JLabel groupFilter = new JLabel("Filtro Gruppo:");
+        JComboBox<String> groupTextField = GuiFactory.getComboBox(view.getController().getAllGroupTypeString());
+        JButton filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK, Font.getFont(FONT),
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String ita = blankReturn(itaTextField);
+                        String eng = blankReturn(engTextField);
+                        String group = groupTextField.getSelectedItem().toString().toUpperCase();
+                        view.goToInitialSceneFiltered(isSaved, ita, eng, group);
+                    }
+                });
+        JButton resetButton = GuiFactory.getButtom("ResetFilter", Color.GRAY, Color.BLACK, Font.getFont(FONT),
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        itaTextField.setText("");
+                        engTextField.setText("");
+                        groupTextField.setSelectedIndex(0);
+                        view.goToInitialScene(isSaved);
+                    }
+                });
+        southPanel.add(Box.createHorizontalStrut(10));
+        southPanel.add(desFilter);
+        southPanel.add(itaTextField);
+        southPanel.add(engFilter);
+        southPanel.add(engTextField);
+        southPanel.add(groupFilter);
+        southPanel.add(groupTextField);
+        southPanel.add(filterButton);
+        southPanel.add(Box.createHorizontalStrut(10));
+        southPanel.add(resetButton);
+        southPanel.add(Box.createHorizontalGlue());
+        southPanel.add(Box.createHorizontalStrut(10));
+        southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
+        this.setBackground(Color.WHITE);
         this.add(southPanel, BorderLayout.SOUTH);
+    }
+
+    private String blankReturn(JTextField textField) {
+        return textField.getText().isBlank() ? "%" : textField.getText().toUpperCase();
+
     }
 }

@@ -2,6 +2,7 @@ package template.view.scenes;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -48,7 +49,8 @@ public class AddDescriptionScene extends JPanel {
 
         JTextField itaTextField = GuiFactory.getTextField(20);
         JTextField engTextField = GuiFactory.getTextField(20);
-        JTextField groupTextField = GuiFactory.getTextField(20);
+        //JTextField groupTextField = GuiFactory.getTextField(20);
+        JComboBox<String> groupTextField = GuiFactory.getComboBox(view.getController().getAllGroupTypeString());
         mainPanel.add(itaLabel);
         mainPanel.add(itaTextField);
 
@@ -67,11 +69,11 @@ public class AddDescriptionScene extends JPanel {
                             view.getController().addDescription(
                                     new Description(itaTextField.getText().toUpperCase(),
                                             engTextField.getText().toUpperCase(),
-                                            groupTextField.getText().toUpperCase()));
+                                            groupTextField.getSelectedItem().toString().toUpperCase()));
                             JOptionPane.showMessageDialog(AddDescriptionScene.this,
                                     "Descrizione Aggiunta con Successo\n" + itaTextField.getText().toUpperCase() + " - "
                                             + engTextField.getText().toUpperCase() + " - "
-                                            + groupTextField.getText().toUpperCase());
+                                            + groupTextField.getSelectedItem().toString().toUpperCase());
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(AddDescriptionScene.this,
                                     "Errore Descrizione Già Presente ");

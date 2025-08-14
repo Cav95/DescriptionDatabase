@@ -28,8 +28,8 @@ public final class Model {
         return descriptionDAO.getDescription(itaDescription, engDescription, group); // Placeholder return statement
     }
 
-    public List<Description> getListDescription() {
-        return descriptionDAO.getListDescription();
+    public List<Description> getListDescription(String itaDescription, String engDescription, String group) {
+        return descriptionDAO.getListDescription( itaDescription, engDescription, group);
 
     }
 
@@ -58,5 +58,9 @@ public final class Model {
             }
             throw new RuntimeException("Failed to commit transaction", e);
         }
+    }
+
+    public List<String> getAllGroupTypeString() {
+        return descriptionDAO.getAllGroupTypeString();
     }
 }
