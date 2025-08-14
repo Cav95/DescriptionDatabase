@@ -12,6 +12,8 @@ import template.view.utils.GuiFactory;
 import template.view.utils.SelectionTable;
 
 public class MainTableScene extends JPanel {
+    private static final String ALL = "%";
+
     // private static final int TIME_TO_LAMP = 6; // Example value, adjust as needed
     private static final String FONT = "Roboto";
 
@@ -29,6 +31,8 @@ public class MainTableScene extends JPanel {
     JLabel engFilter = new JLabel("Filtro Inglese:");
     JTextField engTextField = GuiFactory.getTextField(20);
     JLabel groupFilter = new JLabel("Filtro Gruppo:");
+    List<String> listGroup;
+    JComboBox<String> groupTextField;
 
     @SuppressWarnings("unused")
     private final View view;
@@ -36,9 +40,13 @@ public class MainTableScene extends JPanel {
     public MainTableScene(View view, boolean isSaved) {
         this.view = view;
         this.isSaved = isSaved; // Initialize as saved
-        this.itaDescription = "%";
-        this.engDescription = "%";
-        this.group = "%";
+        this.itaDescription = ALL;
+        this.engDescription = ALL;
+        this.group = ALL;
+
+        listGroup = view.getController().getAllGroupTypeString();
+        listGroup.add(0, "");
+        this.groupTextField = GuiFactory.getComboBox(listGroup);
         initial(view, isSaved);
 
     }
@@ -49,6 +57,15 @@ public class MainTableScene extends JPanel {
         this.itaDescription = itaDescription;
         this.engDescription = engDescription;
         this.group = group;
+
+        this.itaTextField.setText(reversBlankReturn(itaDescription));
+        this.engTextField.setText(reversBlankReturn(engDescription));
+
+        listGroup = view.getController().getAllGroupTypeString();
+        listGroup.add(0, "");
+        this.groupTextField = GuiFactory.getComboBox(listGroup);
+
+        this.groupTextField.setSelectedItem(reversBlankReturn(group));
         initial(view, true);
     }
 
@@ -192,9 +209,8 @@ public class MainTableScene extends JPanel {
         southPanel.add(Save);
         southPanel.add(exit);
 
-        var listGroup = view.getController().getAllGroupTypeString();
-        listGroup.add(0, "");
-        JComboBox<String> groupTextField = GuiFactory.getComboBox(listGroup);
+        // listGroup.add(0, "");
+        // this.groupTextField = GuiFactory.getComboBox(listGroup);
         JButton filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
@@ -204,7 +220,7 @@ public class MainTableScene extends JPanel {
 
                         String group = groupTextField.getSelectedItem().toString().toUpperCase();
                         if (group.isBlank()) {
-                            group = "%";
+                            group = ALL;
                         }
                         view.goToInitialSceneFiltered(isSaved, ita, eng, group);
                     }
@@ -237,7 +253,10 @@ public class MainTableScene extends JPanel {
     }
 
     private String blankReturn(JTextField textField) {
-        return textField.getText().isBlank() ? "%" : textField.getText().toUpperCase();
+        return textField.getText().isBlank() ? ALL : textField.getText().toUpperCase();
+    }
 
+    private String reversBlankReturn(String text) {
+        return text.equals(ALL) ? "" : text.toUpperCase();
     }
 }
