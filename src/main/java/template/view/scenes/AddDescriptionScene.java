@@ -3,6 +3,8 @@ package template.view.scenes;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -13,13 +15,9 @@ import template.view.View;
 import template.view.utils.GuiFactory;
 
 import java.awt.*;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 
-public class AddDescriptionScene extends JOptionPane {
+public class AddDescriptionScene extends JDialog {
 
     private static final String FONT = "Roboto";
 
@@ -28,6 +26,12 @@ public class AddDescriptionScene extends JOptionPane {
 
     public AddDescriptionScene(View view) {
         this.view = view;
+
+                        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                this.setSize(1200, 500);
+                this.setMaximumSize(this.getSize());
+                this.setLocationRelativeTo(view.getMainFrame());
+                this.setResizable(true);
 
         this.setLayout(new BorderLayout());
 
@@ -80,6 +84,7 @@ public class AddDescriptionScene extends JOptionPane {
                                     throw new IllegalArgumentException();
                         } finally {
                             view.getController().initialScene(false);
+                            AddDescriptionScene.this.dispose();
                             
                         }
 
@@ -89,6 +94,7 @@ public class AddDescriptionScene extends JOptionPane {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 view.getController().initialScene(false);
+                AddDescriptionScene.this.dispose();
             }
         }));
 
