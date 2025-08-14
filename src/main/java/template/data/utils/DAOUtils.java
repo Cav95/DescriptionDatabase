@@ -22,15 +22,15 @@ public final class DAOUtils {
     }
     // Establishes a connection to a Microsoft SQL Server database.
     public static Connection localSqlServerConnection(String database, String username, String password) {
-        String string = "jdbc:sqlserver://DBSRV02:1433;"
-                        + "databaseName=EdmDb_2008_001;"
-                        + "user=edm2008;"
-                        + "password=edm2008;"
-                        + "encrypt=false;"
-                        + "trustServerCertificate=false;"
-                        + "loginTimeout=30;";
+         String connectionUrl = "jdbc:sqlserver://DBSRV02:1433;"
+                         + "databaseName=" + database + ";"
+                         + "user=" + username + ";"
+                         + "password=" + password + ";"
+                         + "encrypt=false;"
+                         + "trustServerCertificate=true;"  // <-- importante se encrypt è false
+                         + "loginTimeout=30;";
                try {
-            return DriverManager.getConnection(string);
+            return DriverManager.getConnection(connectionUrl);
         } catch (Exception e) {
             throw new DAOException(e);
         }

@@ -16,7 +16,7 @@ public final class App {
         Connection connection;
         try {
             connection = DAOUtils.localMySQLConnection("DesFusion", "root", "");
-           // connection = DAOUtils.localSqlServerConnection("DesFusion", "sa", "DesFusion2023");
+            //connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001", "edm2008", "edm2008");
         } catch (DAOException e) {
             new ConnectionFailureView();
             return;
