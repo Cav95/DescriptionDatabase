@@ -18,7 +18,24 @@ public final class DAOUtils {
         } catch (Exception e) {
             throw new DAOException(e);
         }
+
     }
+    // Establishes a connection to a Microsoft SQL Server database.
+    public static Connection localSqlServerConnection(String database, String username, String password) {
+        String string = "jdbc:sqlserver://dbsrv02:1433;"
+                        + "database=edmdb_2008_001;"
+                        + "user=admin;"
+                        + "password=edm2008;"
+                        + "encrypt=false;"
+                        + "trustServerCertificate=false;"
+                        + "loginTimeout=30;";
+               try {
+            return DriverManager.getConnection(string);
+        } catch (Exception e) {
+            throw new DAOException(e);
+        }
+    }
+
 
     // We must always prepare a statement to make sure we do not fall victim to SQL injection:
     // https://owasp.org/www-community/attacks/SQL_Injection
