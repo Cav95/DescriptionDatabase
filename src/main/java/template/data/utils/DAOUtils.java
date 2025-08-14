@@ -22,9 +22,9 @@ public final class DAOUtils {
     }
     // Establishes a connection to a Microsoft SQL Server database.
     public static Connection localSqlServerConnection(String database, String username, String password) {
-        String string = "jdbc:sqlserver://dbsrv02:1433;"
-                        + "database=edmdb_2008_001;"
-                        + "user=admin;"
+        String string = "jdbc:sqlserver://DBSRV02:1433;"
+                        + "databaseName=EdmDb_2008_001;"
+                        + "user=edm2008;"
                         + "password=edm2008;"
                         + "encrypt=false;"
                         + "trustServerCertificate=false;"
