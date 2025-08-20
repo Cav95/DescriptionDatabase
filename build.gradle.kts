@@ -30,7 +30,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
 
     // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
-implementation("com.microsoft.sqlserver:mssql-jdbc:6.1.0.jre7")
+        implementation("com.microsoft.sqlserver:mssql-jdbc:6.1.0.jre7")
 }
 
 java {
