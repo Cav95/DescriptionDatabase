@@ -3,20 +3,16 @@ package template.view.scenes;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import template.view.View;
 import template.view.utils.GuiFactory;
-import template.view.utils.UserAdmit;
-
 import java.awt.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class LogInScene extends JPanel {
 

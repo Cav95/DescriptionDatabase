@@ -7,7 +7,6 @@ import template.data.utils.DAOException;
 import template.data.utils.DAOUtils;
 import template.model.Model;
 import template.view.View;
-import template.view.utils.ConnectionFailureView;
 import template.view.utils.ConnectionFailureViewIni;
 
 public final class App {

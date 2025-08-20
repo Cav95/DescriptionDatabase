@@ -5,7 +5,6 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.List;
