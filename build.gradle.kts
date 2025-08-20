@@ -7,6 +7,7 @@ plugins {
 
     // Task to create a fat JAR
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("org.danilopianini.gradle-java-qa") version "1.75.0"
 }
 
 repositories {
@@ -44,7 +45,7 @@ tasks.compileJava {
 }
 
 application {
-    mainClass = "template.App"
+    mainClass = "descriptionupdate.DescriptionUpdateMain"
 }
 
 tasks.test {

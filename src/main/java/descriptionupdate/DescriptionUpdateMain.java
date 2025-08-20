@@ -9,7 +9,7 @@ import descriptionupdate.model.Model;
 import descriptionupdate.view.View;
 import descriptionupdate.view.utils.ConnectionFailureViewIni;
 
-public final class App {
+public final class DescriptionUpdateMain {
 
     public static void main(String[] args) throws SQLException {
 
