@@ -28,7 +28,7 @@ public final class DAOUtils {
 
     // Establishes a connection to a Microsoft SQL Server database.
     public static Connection localSqlServerConnection(String database, String username, String password) {
-        //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String connectionUrl = "jdbc:sqlserver://DBSRV02:1433;"
                 + "databaseName=" + database + ";"
                 + "user=" + username + ";"
@@ -45,8 +45,8 @@ public final class DAOUtils {
 
     /*
      * Establishes a connection to a database using an INI file.
-     * The INI file should be located in the user's home directory and named
-     * "config.ini".
+     * The INI file should be located in the current working directory
+     * and named "configDBConnection.ini".
      * It should contain the following properties:
      * key1=jdbc:mysql://localhost:3306/DesFusion
      * user=root
@@ -66,7 +66,7 @@ public final class DAOUtils {
      */
     public static Connection localIniStringConnection() {
         Properties properties = new Properties();
-        String iniFilePath = System.getProperty("user.home") + System.getProperty("file.separator")
+        String iniFilePath = System.getProperty("user.dir") + System.getProperty("file.separator")
                 + CONFIG_DB_CONNECTION_INI;
 
         try (FileInputStream fileInputStream = new FileInputStream(iniFilePath)) {
@@ -82,13 +82,13 @@ public final class DAOUtils {
             try {
                 return DriverManager.getConnection(connectionString, username, password);
             } catch (Exception e) {
-                
+
                 try {
                     return DriverManager.getConnection(connectionString);
                 } catch (SQLException t) {
                     throw new DAOException("Errore durante la connessione al database", t);
                 }
-                //throw new DAOException(e);
+                // throw new DAOException(e);
             }
 
             // System.out.println("Valore di chiave1: " + valore);
