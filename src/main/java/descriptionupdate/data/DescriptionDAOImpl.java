@@ -25,6 +25,9 @@ public class DescriptionDAOImpl implements DescriptionDAO {
         this.connection = connection;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Description> getDescription(String itaDescription, String engDescription, String group)
             throws DAOException {
@@ -46,11 +49,15 @@ public class DescriptionDAOImpl implements DescriptionDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Description> getListDescription(String itaDescription, String engDescription, String group) {
         List<Description> descriptions = new ArrayList<>();
         try (
-                var statement = DAOUtils.prepare(connection, Queries.GET_ALL_TABLE, itaDescription, engDescription, group);
+                var statement = DAOUtils.prepare(connection, Queries.GET_ALL_TABLE, itaDescription, engDescription,
+                        group);
                 var resultSet = statement.executeQuery();) {
             while (resultSet.next()) {
                 descriptions.add(new Description(resultSet.getString(DescriptionColumnName.ITA_DES.getColumnName()),
@@ -64,6 +71,9 @@ public class DescriptionDAOImpl implements DescriptionDAO {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addDescription(String itaDescription, String engDescription, String group) {
         {
@@ -77,6 +87,9 @@ public class DescriptionDAOImpl implements DescriptionDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteDescription(String itaDescription, String engDescription, String group) {
 
@@ -90,6 +103,9 @@ public class DescriptionDAOImpl implements DescriptionDAO {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateDescription(String exItaDescription, String exEngDescription, String exGroup,
             String newItaDescription, String newEngDescription) {
@@ -103,6 +119,9 @@ public class DescriptionDAOImpl implements DescriptionDAO {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getAllGroupTypeString() throws DAOException {
         List<String> groupTypes = new ArrayList<>();

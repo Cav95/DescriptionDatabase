@@ -17,6 +17,9 @@ import descriptionupdate.view.utils.GuiFactory;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * AddDescriptionScene class that extends JDialog to allow users to add a new description.
+ */
 public class AddDescriptionScene extends JDialog {
 
     private static final String FONT = "Roboto";
@@ -24,6 +27,11 @@ public class AddDescriptionScene extends JDialog {
     @SuppressWarnings("unused")
     private final View view;
 
+    /**
+     * Constructor for AddDescriptionScene.
+     *
+     * @param view the main view of the application
+     */
     public AddDescriptionScene(View view) {
         this.view = view;
 
@@ -53,7 +61,6 @@ public class AddDescriptionScene extends JDialog {
 
         JTextField itaTextField = GuiFactory.getTextField(20);
         JTextField engTextField = GuiFactory.getTextField(20);
-        //JTextField groupTextField = GuiFactory.getTextField(20);
         JComboBox<String> groupTextField = GuiFactory.getComboBox(view.getController().getAllGroupTypeString());
         mainPanel.add(itaLabel);
         mainPanel.add(itaTextField);

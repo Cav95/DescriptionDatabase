@@ -1,5 +1,9 @@
 package descriptionupdate.data.api.dao;
 
+/**
+ * Enum representing the column names for the description table.
+ * This is used to standardize the column names across the application.
+ */
 public enum DescriptionColumnName {
     ITA_DES("DESCRIZIONE"),
     ENG_DES("INGLESE"),
@@ -11,6 +15,11 @@ public enum DescriptionColumnName {
         this.columnName = columnName;
     }
 
+    /**
+     * Returns the column name as a string.
+     *
+     * @return the column name
+     */
     public String getColumnName() {
         return columnName;
     }

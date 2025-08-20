@@ -15,6 +15,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
+/**
+ * LogInScene class that extends JPanel to create a login scene for the application.
+ */
 public class LogInScene extends JPanel {
 
     private static final String FONT = "Roboto";
@@ -22,6 +25,11 @@ public class LogInScene extends JPanel {
     @SuppressWarnings("unused")
     private final View view;
 
+    /**
+     * Constructor for LogInScene.
+     *
+     * @param view the main view of the application
+     */
     public LogInScene(View view) {
         this.view = view;
         this.setLayout(new BorderLayout());
@@ -43,14 +51,6 @@ public class LogInScene extends JPanel {
         mainPanel.add(GuiFactory.getButtom("Accedi", Color.GRAY, Color.BLACK, Font.getFont(FONT), new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                /*if (Arrays.asList(UserAdmit.values()).stream()
-                        .filter(t -> t.getName().equals(System.getProperty("user.name")))
-                        .findFirst().isPresent()) {
-                    view.getController().initialScene(true);
-                } else {
-                    JOptionPane.showMessageDialog(view.getMainFrame(), "Accesso negato", "Errore",
-                            JOptionPane.ERROR_MESSAGE);
-                }*/
                view.getController().initialScene(true);
             }
         }));

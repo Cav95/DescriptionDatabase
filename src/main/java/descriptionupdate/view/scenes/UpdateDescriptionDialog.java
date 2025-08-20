@@ -28,9 +28,11 @@ public class UpdateDescriptionDialog extends JDialog {
         private static final long serialVersionUID = 1L;
         private static final String FONT = "Roboto";
 
-        private final String exIta;
-        private final String exEng;
-        private final String exGroup;
+        JLabel itaLabel = new JLabel("ITA Description:");
+        JLabel engLabel = new JLabel("ENG Description:");
+
+        JTextField itaTextField = GuiFactory.getTextField(20);
+        JTextField engTextField = GuiFactory.getTextField(20);
 
         private boolean isUpdated = false;
 
@@ -42,12 +44,10 @@ public class UpdateDescriptionDialog extends JDialog {
          * @param removeMode whether to remove the dialog after displaying results
          * @param result     the result string to be displayed
          */
-        public UpdateDescriptionDialog(final View view, final String title, String ita, String eng, String group) {
+        public UpdateDescriptionDialog(final View view, final String title, String exIta, String exEng,
+                        String exGroup) {
 
                 super(view.getMainFrame(), title, ModalityType.APPLICATION_MODAL);
-                this.exIta = ita;
-                this.exEng = eng;
-                this.exGroup = group;
 
                 this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 this.setSize(800, 500);
@@ -62,7 +62,8 @@ public class UpdateDescriptionDialog extends JDialog {
                 titlePannel.setBorder(BorderFactory.createEmptyBorder(50, 20, 20, 20));
                 this.add(titlePannel, BorderLayout.NORTH);
 
-                JLabel titleLabel = new JLabel("Stai aggiornando la descrizione: " + group + " - " + ita + " - " + eng);
+                JLabel titleLabel = new JLabel(
+                                "Stai aggiornando la descrizione: " + exGroup + " - " + exIta + " - " + exEng);
                 titleLabel.setFont(new Font(FONT, Font.BOLD, 15));
                 titleLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
                 titlePannel.add(titleLabel, BorderLayout.CENTER);
@@ -70,21 +71,16 @@ public class UpdateDescriptionDialog extends JDialog {
                 final JPanel mainPanel = new JPanel();
                 mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
                 mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
-                JLabel itaLabel = new JLabel("ITA Description:");
-                JLabel engLabel = new JLabel("ENG Description:");
-                // JLabel groupLabel = new JLabel("Group:");
 
-                JTextField itaTextField = GuiFactory.getTextField(20);
-                JTextField engTextField = GuiFactory.getTextField(20);
-                // JTextField groupTextField = GuiFactory.getTextField(20);
+                itaTextField.setText(exIta);
+                engTextField.setText(exEng);
+
                 mainPanel.add(itaLabel);
                 mainPanel.add(itaTextField);
 
                 mainPanel.add(engLabel);
                 mainPanel.add(engTextField);
 
-                // mainPanel.add(groupLabel);
-                // mainPanel.add(groupTextField);
                 this.add(mainPanel, BorderLayout.CENTER);
 
                 // Correggi il nome del pannello
@@ -121,7 +117,7 @@ public class UpdateDescriptionDialog extends JDialog {
         }
 
         public boolean isUpdated() {
-            return isUpdated;
+                return isUpdated;
         };
 
 }

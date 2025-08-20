@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * MainTableScene class that extends JPanel to create the main table scene for the application.
+ */
 public class MainTableScene extends JPanel {
     private static final String ALL = "%";
 
@@ -44,6 +47,12 @@ public class MainTableScene extends JPanel {
     @SuppressWarnings("unused")
     private final View view;
 
+    /**
+     * Constructor for MainTableScene.
+     *
+     * @param view the main view of the application
+     * @param isSaved whether the scene is saved or not
+     */
     public MainTableScene(View view, boolean isSaved) {
         this.view = view;
         this.isSaved = isSaved; // Initialize as saved
@@ -58,6 +67,15 @@ public class MainTableScene extends JPanel {
 
     }
 
+    /**
+     * Constructor for MainTableScene with specific descriptions and group.
+     *
+     * @param view the main view of the application
+     * @param isSaved whether the scene is saved or not
+     * @param itaDescription Italian description to filter
+     * @param engDescription English description to filter
+     * @param group group to filter
+     */
     public MainTableScene(View view, boolean isSaved, String itaDescription, String engDescription, String group) {
         this.view = view;
         this.isSaved = true; // Initialize as saved
@@ -122,16 +140,8 @@ public class MainTableScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        /*try {
-                            view.getController().addScene();
-                            // isSaved = false; // Mark as not saved after adding
-                        } catch (Exception ex) {
-
-                        }*/
                         AddDescriptionScene dialog = new AddDescriptionScene(view);
                             dialog.setVisible(true);
-
-
                     }
                 });
         deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, Font.getFont(FONT),
@@ -145,7 +155,6 @@ public class MainTableScene extends JPanel {
                             String eng = (String) table.getValueAt(selectedRow, 2);
                             view.getController().deleteDescription(new Description(ita, eng, group));
                             view.getController().initialScene(false);
-                            // isSaved = false; // Mark as not saved after deletion
                         } else {
                             throw new IllegalStateException("No request selected for management");
                         }
@@ -219,8 +228,6 @@ public class MainTableScene extends JPanel {
         southPanel.add(saveButton);
         southPanel.add(exitButton);
 
-        // listGroup.add(0, "");
-        // this.groupTextField = GuiFactory.getComboBox(listGroup);
         JButton filterButton = GuiFactory.getButtom("Filtra", Color.GRAY, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override

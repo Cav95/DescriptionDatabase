@@ -14,6 +14,14 @@ public final class DAOUtils {
 
     // Establishes a connection to a MySQL daemon running locally at port 3306.
     //
+    /**
+     * Establishes a connection to a MySQL database.
+     * * @param database the name of the database
+     * @param username the username for the database connection
+     * @param password the password for the database connection
+     * @return a Connection object to the MySQL database
+     * @throws DAOException if an error occurs while establishing the connection
+     */
     public static Connection localMySQLConnection(String database, String username, String password) {
         try {
             var host = "localhost";
@@ -27,6 +35,14 @@ public final class DAOUtils {
     }
 
     // Establishes a connection to a Microsoft SQL Server database.
+    /**
+     * Establishes a connection to a Microsoft SQL Server database.
+     * * @param database the name of the database
+     * @param username the username for the database connection
+     * @param password the password for the database connection
+     * @return a Connection object to the Microsoft SQL Server database
+     * @throws DAOException if an error occurs while establishing the connection
+     */
     public static Connection localSqlServerConnection(String database, String username, String password) {
         // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String connectionUrl = "jdbc:sqlserver://DBSRV02:1433;"
