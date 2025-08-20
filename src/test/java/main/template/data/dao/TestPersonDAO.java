@@ -10,9 +10,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import template.data.DescriptionDAOImpl;
-import template.data.utils.DAOUtils;
-import template.model.api.Description;
+import descriptionupdate.data.DescriptionDAOImpl;
+import descriptionupdate.data.utils.DAOUtils;
+import descriptionupdate.model.api.Description;
 
 class TestdescDao {
 

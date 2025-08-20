@@ -1,0 +1,66 @@
+package descriptionupdate.model;
+
+import java.sql.Connection;
+import java.util.List;
+import java.util.Optional;
+
+import descriptionupdate.data.DescriptionDAOImpl;
+import descriptionupdate.data.api.dao.DescriptionDAO;
+import descriptionupdate.model.api.Description;
+
+public final class Model {
+
+    private final Connection connection;
+    DescriptionDAO descriptionDAO;
+
+    public Model(Connection connection) {
+        this.connection = connection;
+        this.descriptionDAO = new DescriptionDAOImpl(connection);
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    // Other model methods can be added here
+
+    public Optional<Description> getDescription(String itaDescription, String engDescription, String group) {
+        return descriptionDAO.getDescription(itaDescription, engDescription, group); // Placeholder return statement
+    }
+
+    public List<Description> getListDescription(String itaDescription, String engDescription, String group) {
+        return descriptionDAO.getListDescription( itaDescription, engDescription, group);
+
+    }
+
+    public void addDescription(Description description) {
+        descriptionDAO.addDescription(description.itaDescripion(),
+                description.engDescription(), description.group());
+    }
+
+    public void deleteDescription(Description description) {
+        descriptionDAO.deleteDescription(description.itaDescripion(),
+                description.engDescription(), description.group());
+    }
+
+    public void updateDescription(Description oldDescription, Description newDescription) {
+        descriptionDAO.updateDescription(oldDescription.itaDescripion(), oldDescription.engDescription(), oldDescription.group(), newDescription.itaDescripion(), newDescription.engDescription());
+    }
+
+    public void save() {
+        try {
+            connection.commit();
+        } catch (Exception e) {
+            try {
+                connection.rollback();
+            } catch (Exception rollbackEx) {
+                throw new RuntimeException("Failed to rollback transaction after commit failure", rollbackEx);
+            }
+            throw new RuntimeException("Failed to commit transaction", e);
+        }
+    }
+
+    public List<String> getAllGroupTypeString() {
+        return descriptionDAO.getAllGroupTypeString();
+    }
+}

@@ -1,3 +1,3 @@
-// Project: Template
-rootProject.name = "Template"
+// Project: DescriptionUpdate
+rootProject.name = "DescriptionUpdate"
 

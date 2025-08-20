@@ -1,0 +1,103 @@
+package descriptionupdate.view.scenes;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import descriptionupdate.model.api.Description;
+import descriptionupdate.view.View;
+import descriptionupdate.view.utils.GuiFactory;
+
+import java.awt.*;
+import java.awt.event.ActionListener;
+
+public class AddDescriptionScene extends JDialog {
+
+    private static final String FONT = "Roboto";
+
+    @SuppressWarnings("unused")
+    private final View view;
+
+    public AddDescriptionScene(View view) {
+        this.view = view;
+
+                        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                this.setSize(1200, 500);
+                this.setMaximumSize(this.getSize());
+                this.setLocationRelativeTo(view.getMainFrame());
+                this.setResizable(true);
+
+        this.setLayout(new BorderLayout());
+
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
+        northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
+        JLabel titleLabel = new JLabel("Add Description Scene");
+        titleLabel.setFont(new Font(FONT, Font.BOLD, 24));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        northPanel.add(titleLabel);
+        this.add(northPanel, BorderLayout.NORTH);
+
+        final JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
+        JLabel itaLabel = new JLabel("ITA Description:");
+        JLabel engLabel = new JLabel("ENG Description:");
+        JLabel groupLabel = new JLabel("Group:");
+
+        JTextField itaTextField = GuiFactory.getTextField(20);
+        JTextField engTextField = GuiFactory.getTextField(20);
+        //JTextField groupTextField = GuiFactory.getTextField(20);
+        JComboBox<String> groupTextField = GuiFactory.getComboBox(view.getController().getAllGroupTypeString());
+        mainPanel.add(itaLabel);
+        mainPanel.add(itaTextField);
+
+        mainPanel.add(engLabel);
+        mainPanel.add(engTextField);
+
+        mainPanel.add(groupLabel);
+        mainPanel.add(groupTextField);
+        this.add(mainPanel, BorderLayout.CENTER);
+
+        mainPanel.add(
+                GuiFactory.getButtom("Aggiungi", Color.GRAY, Color.BLACK, Font.getFont(FONT), new ActionListener() {
+                    @Override
+                    public void actionPerformed(java.awt.event.ActionEvent e) {
+                        try {
+                            view.getController().addDescription(
+                                    new Description(itaTextField.getText().toUpperCase(),
+                                            engTextField.getText().toUpperCase(),
+                                            groupTextField.getSelectedItem().toString().toUpperCase()));
+                            JOptionPane.showMessageDialog(AddDescriptionScene.this,
+                                    "Descrizione Aggiunta con Successo\n" + itaTextField.getText().toUpperCase() + " - "
+                                            + engTextField.getText().toUpperCase() + " - "
+                                            + groupTextField.getSelectedItem().toString().toUpperCase());
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(AddDescriptionScene.this,
+                                    "Errore Descrizione Già Presente ");
+                                    throw new IllegalArgumentException();
+                        } finally {
+                            view.getController().initialScene(false);
+                            AddDescriptionScene.this.dispose();
+                            
+                        }
+
+                    }
+                }));
+        mainPanel.add(GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, Font.getFont(FONT), new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                view.getController().initialScene(false);
+                AddDescriptionScene.this.dispose();
+            }
+        }));
+
+    }
+
+}
