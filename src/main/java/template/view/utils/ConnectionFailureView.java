@@ -10,11 +10,11 @@ public class ConnectionFailureView extends JFrame {
         this.setAlwaysOnTop(true);
         JOptionPane.showMessageDialog(this, 
             "Impossibile connettersi al database.\n" +
-            "Assicurarsi che il server MySQL sia in esecuzione e che esista un database chiamato 'DesFusion'.", 
+            "Assicurarsi che il server selezionato sia in esecuzione e che esista", 
             "Errore di connessione al database", 
             JOptionPane.ERROR_MESSAGE
         );
         this.dispose();
-    }
+    }    
     
 }

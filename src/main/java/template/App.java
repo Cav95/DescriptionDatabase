@@ -8,6 +8,7 @@ import template.data.utils.DAOUtils;
 import template.model.Model;
 import template.view.View;
 import template.view.utils.ConnectionFailureView;
+import template.view.utils.ConnectionFailureViewIni;
 
 public final class App {
 
@@ -19,7 +20,7 @@ public final class App {
             //connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001", "edm2008", "edm2008");
             connection = DAOUtils.localIniStringConnection();
         } catch (DAOException e) {
-            new ConnectionFailureView();
+            new ConnectionFailureViewIni();
             return;
         }
         connection.setAutoCommit(false);
