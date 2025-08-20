@@ -46,15 +46,15 @@ public class LogInScene extends JPanel {
         mainPanel.add(GuiFactory.getButtom("Accedi", Color.GRAY, Color.BLACK, Font.getFont(FONT), new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (Arrays.asList(UserAdmit.values()).stream()
+                /*if (Arrays.asList(UserAdmit.values()).stream()
                         .filter(t -> t.getName().equals(System.getProperty("user.name")))
                         .findFirst().isPresent()) {
                     view.getController().initialScene(true);
                 } else {
                     JOptionPane.showMessageDialog(view.getMainFrame(), "Accesso negato", "Errore",
                             JOptionPane.ERROR_MESSAGE);
-                }
-               // view.getController().initialScene();
+                }*/
+               view.getController().initialScene(true);
             }
         }));
 

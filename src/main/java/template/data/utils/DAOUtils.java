@@ -2,6 +2,7 @@ package template.data.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -69,16 +70,15 @@ public final class DAOUtils {
         String iniFilePath = System.getProperty("user.dir") + System.getProperty("file.separator")
                 + CONFIG_DB_CONNECTION_INI;
 
-        try (FileInputStream fileInputStream = new FileInputStream(iniFilePath)) {
-            properties.load(fileInputStream);
+    try (FileInputStream fileInputStream = new FileInputStream(iniFilePath)) {
+        properties.load(fileInputStream);
+    } catch (IOException e) {
+    }
 
             // Leggi una singola chiave
             String connectionString = properties.getProperty("key1");
             String username = properties.getProperty("user");
             String password = properties.getProperty("psw");
-            System.out.println("Valore di chiave1: " + connectionString);
-            System.out.println("Valore di user: " + username);
-            System.out.println("Valore di psw: " + password);
             try {
                 return DriverManager.getConnection(connectionString, username, password);
             } catch (Exception e) {
@@ -92,11 +92,6 @@ public final class DAOUtils {
             }
 
             // System.out.println("Valore di chiave1: " + valore);
-
-        } catch (IOException e) {
-            throw new DAOException("Errore durante la lettura del file" + System.getProperty("user.home")
-                    + System.getProperty("file.separator") + CONFIG_DB_CONNECTION_INI, e);
-        }
     }
 
     // We must always prepare a statement to make sure we do not fall victim to SQL
