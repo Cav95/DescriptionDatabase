@@ -124,6 +124,7 @@ public final class Controller {
     public void save() {
         LOGGER.info("Saving changes to the database");
         model.save();
+        view.goToInitialScene(true); // Navigate to the main table scene after saving
     }
 
     /**
