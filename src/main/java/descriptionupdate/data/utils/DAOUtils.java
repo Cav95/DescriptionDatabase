@@ -8,6 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Utility class for managing database connections and preparing SQL statements.
+ * Provides methods to establish connections to MySQL and SQL Server databases,
+ * as well as to prepare SQL statements with parameters.
+ */
 public final class DAOUtils {
 
     private static final String CONFIG_DB_CONNECTION_INI = "configDBConnection.ini";

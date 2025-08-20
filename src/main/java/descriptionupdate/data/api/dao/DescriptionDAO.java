@@ -59,7 +59,7 @@ public interface DescriptionDAO {
 
     /**
      * Retrieves all group types as a list of strings.
-     * @return
+     * @return a list of group type strings.
      * @throws DAOException
      */
     List<String> getAllGroupTypeString() throws DAOException;

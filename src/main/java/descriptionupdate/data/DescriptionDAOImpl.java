@@ -12,6 +12,10 @@ import descriptionupdate.data.utils.DAOException;
 import descriptionupdate.data.utils.DAOUtils;
 import descriptionupdate.model.api.Description;
 
+/**
+ * Implementation of the DescriptionDAO interface for managing descriptions in
+ * the database.
+ */
 public class DescriptionDAOImpl implements DescriptionDAO {
 
     private final Connection connection;
@@ -19,7 +23,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
     /**
      * Constructor for PlanetDAOImpl.
      * 
-     * @param connection the database connection
+     * @param connection the database connection.
      */
     public DescriptionDAOImpl(Connection connection) {
         this.connection = connection;
@@ -29,7 +33,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
      * {@inheritDoc}
      */
     @Override
-    public Optional<Description> getDescription(String itaDescription, String engDescription, String group)
+    public Optional<Description> getDescription(final String itaDescription,final String engDescription,final String group)
             throws DAOException {
         try (
                 var statement = DAOUtils.prepare(connection, Queries.GET_ONE_DES, itaDescription, engDescription,
@@ -53,7 +57,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
      * {@inheritDoc}
      */
     @Override
-    public List<Description> getListDescription(String itaDescription, String engDescription, String group) {
+    public List<Description> getListDescription(final String itaDescription,final String engDescription,final String group) {
         List<Description> descriptions = new ArrayList<>();
         try (
                 var statement = DAOUtils.prepare(connection, Queries.GET_ALL_TABLE, itaDescription, engDescription,
@@ -75,7 +79,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
      * {@inheritDoc}
      */
     @Override
-    public void addDescription(String itaDescription, String engDescription, String group) {
+    public void addDescription(final String itaDescription,final String engDescription,final String group) {
         {
             try (
                     var statement = DAOUtils.prepare(connection, Queries.INSERT_ONE_DES, itaDescription, engDescription,
@@ -91,7 +95,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
      * {@inheritDoc}
      */
     @Override
-    public void deleteDescription(String itaDescription, String engDescription, String group) {
+    public void deleteDescription(final String itaDescription,final String engDescription,final String group) {
 
         try (
                 var statement = DAOUtils.prepare(connection, Queries.DELETE_ONE_DES, itaDescription, engDescription,
@@ -107,7 +111,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
      * {@inheritDoc}
      */
     @Override
-    public void updateDescription(String exItaDescription, String exEngDescription, String exGroup,
+    public void updateDescription(final String exItaDescription,final String exEngDescription,final String exGroup,
             String newItaDescription, String newEngDescription) {
         try (
                 var statement = DAOUtils.prepare(connection, Queries.UPDATE_ONE_DES,

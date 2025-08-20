@@ -39,7 +39,7 @@ class TestdescDao {
     @Test
     public void fromDescription() {
         var descDao = new DescriptionDAOImpl(connection);
-        var actual = descDao.getDescription("ANTIVIBRANTE","ANTI-VIBRATION","ANV_ANTIVIBRANTI").get();
+        var actual = descDao.getDescription("ANTIVIBRANTE", "ANTI-VIBRATION", "ANV_ANTIVIBRANTI").get();
         var expected = new Description("ANTIVIBRANTE", "ANTI-VIBRATION", "ANV_ANTIVIBRANTI");
         assertEquals(expected, actual);
     }
@@ -54,7 +54,7 @@ class TestdescDao {
         assertEquals(expected, actual);
     }
 
-        @Test
+    @Test
     public void deleteDescription() {
         var descDao = new DescriptionDAOImpl(connection);
         descDao.addDescription("PIPPO", "PLUTO", "VTS");
@@ -67,7 +67,7 @@ class TestdescDao {
         assertEquals(descDao.getDescription("PIPPO", "PLUTO", "VTS"), Optional.empty());
     }
 
-            @Test
+    @Test
     public void fixDescription() {
         var descDao = new DescriptionDAOImpl(connection);
         descDao.addDescription("PIPPO", "PLUTO", "TVB");
@@ -76,10 +76,9 @@ class TestdescDao {
         var expected = new Description("PIPPO", "PLUTO", "TVB");
         assertEquals(expected, actual);
 
-        descDao.updateDescription("PIPPO", "PLUTO", "TVB","CIAO", "HELLO");
+        descDao.updateDescription("PIPPO", "PLUTO", "TVB", "CIAO", "HELLO");
         assertEquals(descDao.getDescription("CIAO", "HELLO", "TVB").get(),
-        new Description("CIAO", "HELLO", "TVB"));
+                new Description("CIAO", "HELLO", "TVB"));
     }
 
-   
 }

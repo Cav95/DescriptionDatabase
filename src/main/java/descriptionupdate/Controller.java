@@ -12,8 +12,10 @@ import descriptionupdate.view.View;
  * Controller class that manages the interaction between the model and the view.
  * It handles user actions and updates the view accordingly.
  * This class is responsible for coordinating the flow of data and actions
- * between the model and the view, ensuring that the application behaves as expected.
- * It provides methods to initialize scenes, retrieve and manipulate descriptions,
+ * between the model and the view, ensuring that the application behaves as
+ * expected.
+ * It provides methods to initialize scenes, retrieve and manipulate
+ * descriptions,
  * and manage the application's state.
  */
 public final class Controller {
@@ -30,7 +32,7 @@ public final class Controller {
      * @param view  the view to be managed by the controller
      * @throws NullPointerException if model or view is null
      */
-    public Controller(Model model, View view) {
+    public Controller(final Model model, final View view) {
         Objects.requireNonNull(model, "Controller created with null model");
         Objects.requireNonNull(view, "Controller created with null view");
         this.view = view;
@@ -40,9 +42,9 @@ public final class Controller {
     /**
      * Sets the controller for the view.
      *
-     * @param controller the controller to be set
+     * @param isSaved whether the scene is saved or not
      */
-    public void initialScene(Boolean isSaved) {
+    public void initialScene(final Boolean isSaved) {
         LOGGER.info("Initial scene");
         view.goToInitialScene(isSaved);
 
@@ -71,9 +73,10 @@ public final class Controller {
      * @param engDescription the English description
      * @param group          the group type
      * @return the description matching the provided parameters
-     * @throws IllegalArgumentException if no description is found for the provided parameters
+     * @throws IllegalArgumentException if no description is found for the provided
+     *                                  parameters
      */
-    public Description getDescription(String itaDescription, String engDescription, String group) {
+    public Description getDescription(final String itaDescription, final String engDescription, final String group) {
         LOGGER.info("Getting description for: {}, {}, {}", itaDescription, engDescription, group);
         return model.getDescription(itaDescription, engDescription, group)
                 .orElseThrow(() -> new IllegalArgumentException("No description found for the provided parameters"));
@@ -87,9 +90,10 @@ public final class Controller {
      * @param group          the group type
      * @return a list of descriptions matching the provided parameters
      */
-    public List<Description> getListDescription( String itaDescription, String engDescription, String group) {
+    public List<Description> getListDescription(final String itaDescription, final String engDescription,
+            final String group) {
         LOGGER.info("Getting list of descriptions");
-        return model.getListDescription(itaDescription, engDescription, group  );
+        return model.getListDescription(itaDescription, engDescription, group);
 
     }
 
@@ -98,7 +102,7 @@ public final class Controller {
      *
      * @param description the description to be added
      */
-    public void addDescription(Description description) {
+    public void addDescription(final Description description) {
         LOGGER.info("Adding description: {}", description);
         model.addDescription(description);
     }
@@ -108,12 +112,12 @@ public final class Controller {
      *
      * @param description the description to be deleted
      */
-    public void deleteDescription(Description description) {
+    public void deleteDescription(final Description description) {
         LOGGER.info("Delete description: {}", description);
         model.deleteDescription(description);
     }
 
-    public void updateDescription(Description oldDescription, Description newDescription) {
+    public void updateDescription(final Description oldDescription, final Description newDescription) {
         LOGGER.info("Updating description from: {}, {}, {} to: {}, {}, {}", oldDescription, newDescription);
         model.updateDescription(oldDescription, newDescription);
     }
