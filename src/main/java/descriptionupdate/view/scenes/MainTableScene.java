@@ -13,18 +13,14 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * MainTableScene class that extends JPanel to create the main table scene for the application.
+ * MainTableScene class that extends JPanel to create the main table scene for
+ * the application.
  */
 public class MainTableScene extends JPanel {
     private static final String ALL = "%";
-
-    // private static final int TIME_TO_LAMP = 6; // Example value, adjust as needed
     private static final String FONT = "Roboto";
 
     private static final long serialVersionUID = 1L;
-
-    //@SuppressWarnings("unused")
-    //private boolean isSaved;
 
     private String itaDescription;
     private String engDescription;
@@ -51,11 +47,10 @@ public class MainTableScene extends JPanel {
      * Constructor for MainTableScene.
      *
      * @param view the main view of the application
-     * @param isSaved whether the scene is saved or not
      */
     public MainTableScene(View view) {
         this.view = view;
-       // this.isSaved = isSaved; // Initialize as saved
+        // this.isSaved = isSaved; // Initialize as saved
         this.itaDescription = ALL;
         this.engDescription = ALL;
         this.group = ALL;
@@ -70,15 +65,14 @@ public class MainTableScene extends JPanel {
     /**
      * Constructor for MainTableScene with specific descriptions and group.
      *
-     * @param view the main view of the application
-     * @param isSaved whether the scene is saved or not
+     * @param view           the main view of the application
      * @param itaDescription Italian description to filter
      * @param engDescription English description to filter
-     * @param group group to filter
+     * @param group          group to filter
      */
-    public MainTableScene(View view,String itaDescription, String engDescription, String group) {
+    public MainTableScene(View view, String itaDescription, String engDescription, String group) {
         this.view = view;
-       // this.isSaved = true; // Initialize as saved
+        // this.isSaved = true; // Initialize as saved
         this.itaDescription = itaDescription + ALL;
         this.engDescription = engDescription + ALL;
         this.group = group;
@@ -101,7 +95,7 @@ public class MainTableScene extends JPanel {
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
-        JLabel titleLabel = new JLabel("Welcome Scene");
+        JLabel titleLabel = new JLabel("TABELLA DESCRIZIONI");
         titleLabel.setFont(new Font(FONT, Font.BOLD, 24));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(titleLabel);
@@ -141,7 +135,7 @@ public class MainTableScene extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         AddDescriptionScene dialog = new AddDescriptionScene(view);
-                            dialog.setVisible(true);
+                        dialog.setVisible(true);
                     }
                 });
         deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, Font.getFont(FONT),
@@ -179,7 +173,7 @@ public class MainTableScene extends JPanel {
                         }
                     }
                 });
-        saveButton = GuiFactory.getButtom("Save", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        saveButton = GuiFactory.getButtom("Salva", Color.GREEN, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -244,7 +238,7 @@ public class MainTableScene extends JPanel {
                         view.goToInitialSceneFiltered(ita, eng, group);
                     }
                 });
-        JButton resetButton = GuiFactory.getButtom("ResetFilter", Color.GRAY, Color.BLACK, Font.getFont(FONT),
+        JButton resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK, Font.getFont(FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {

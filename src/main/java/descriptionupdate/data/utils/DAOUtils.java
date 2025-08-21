@@ -22,6 +22,7 @@ public final class DAOUtils {
     /**
      * Establishes a connection to a MySQL database.
      * * @param database the name of the database
+     * 
      * @param username the username for the database connection
      * @param password the password for the database connection
      * @return a Connection object to the MySQL database
@@ -43,6 +44,7 @@ public final class DAOUtils {
     /**
      * Establishes a connection to a Microsoft SQL Server database.
      * * @param database the name of the database
+     * 
      * @param username the username for the database connection
      * @param password the password for the database connection
      * @return a Connection object to the Microsoft SQL Server database
@@ -90,28 +92,28 @@ public final class DAOUtils {
         String iniFilePath = System.getProperty("user.dir") + System.getProperty("file.separator")
                 + CONFIG_DB_CONNECTION_INI;
 
-    try (FileInputStream fileInputStream = new FileInputStream(iniFilePath)) {
-        properties.load(fileInputStream);
-    } catch (IOException e) {
-    }
+        try (FileInputStream fileInputStream = new FileInputStream(iniFilePath)) {
+            properties.load(fileInputStream);
+        } catch (IOException e) {
+        }
 
-            // Leggi una singola chiave
-            String connectionString = properties.getProperty("key1");
-            String username = properties.getProperty("user");
-            String password = properties.getProperty("psw");
+        // Leggi una singola chiave
+        String connectionString = properties.getProperty("key1");
+        String username = properties.getProperty("user");
+        String password = properties.getProperty("psw");
+        try {
+            return DriverManager.getConnection(connectionString, username, password);
+        } catch (Exception e) {
+
             try {
-                return DriverManager.getConnection(connectionString, username, password);
-            } catch (Exception e) {
-
-                try {
-                    return DriverManager.getConnection(connectionString);
-                } catch (SQLException t) {
-                    throw new DAOException("Errore durante la connessione al database", t);
-                }
-                // throw new DAOException(e);
+                return DriverManager.getConnection(connectionString);
+            } catch (SQLException t) {
+                throw new DAOException("Errore durante la connessione al database", t);
             }
+            // throw new DAOException(e);
+        }
 
-            // System.out.println("Valore di chiave1: " + valore);
+        // System.out.println("Valore di chiave1: " + valore);
     }
 
     // We must always prepare a statement to make sure we do not fall victim to SQL

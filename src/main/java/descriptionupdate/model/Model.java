@@ -15,7 +15,8 @@ public final class Model {
 
     /**
      * Constructor for Model.
-     * Initializes the model with a database connection and sets up the DescriptionDAO.
+     * Initializes the model with a database connection and sets up the
+     * DescriptionDAO.
      *
      * @param connection the database connection
      */
@@ -41,7 +42,8 @@ public final class Model {
      * @param itaDescription the Italian description
      * @param engDescription the English description
      * @param group          the group type
-     * @return an Optional containing the description if found, or empty if not found
+     * @return an Optional containing the description if found, or empty if not
+     *         found
      */
     public Optional<Description> getDescription(String itaDescription, String engDescription, String group) {
         return descriptionDAO.getDescription(itaDescription, engDescription, group); // Placeholder return statement
@@ -56,7 +58,7 @@ public final class Model {
      * @return a list of descriptions matching the provided parameters
      */
     public List<Description> getListDescription(String itaDescription, String engDescription, String group) {
-        return descriptionDAO.getListDescription( itaDescription, engDescription, group);
+        return descriptionDAO.getListDescription(itaDescription, engDescription, group);
 
     }
 
@@ -87,7 +89,8 @@ public final class Model {
      * @param newDescription the new description to replace the old one
      */
     public void updateDescription(Description oldDescription, Description newDescription) {
-        descriptionDAO.updateDescription(oldDescription.itaDescripion(), oldDescription.engDescription(), oldDescription.group(), newDescription.itaDescripion(), newDescription.engDescription());
+        descriptionDAO.updateDescription(oldDescription.itaDescripion(), oldDescription.engDescription(),
+                oldDescription.group(), newDescription.itaDescripion(), newDescription.engDescription());
     }
 
     /**

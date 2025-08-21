@@ -34,8 +34,6 @@ public class UpdateDescriptionDialog extends JDialog {
         JTextField itaTextField = GuiFactory.getTextField(20);
         JTextField engTextField = GuiFactory.getTextField(20);
 
-        private boolean isUpdated = false;
-
         /**
          * Constructor for ResultPane.
          * 
@@ -102,7 +100,6 @@ public class UpdateDescriptionDialog extends JDialog {
                                                                         + itaTextField.getText().toUpperCase() + " - "
                                                                         + engTextField.getText().toUpperCase() + " - "
                                                                         + exGroup);
-                                        //isUpdated = true; // Mark as updated
                                         view.getController().setSaved(false); // Mark as not saved
                                         view.getController().initialScene();
                                         UpdateDescriptionDialog.this.dispose();
@@ -116,9 +113,5 @@ public class UpdateDescriptionDialog extends JDialog {
                 });
                 bottomPanel.add(update);
         }
-
-        public boolean isUpdated() {
-                return isUpdated;
-        };
 
 }

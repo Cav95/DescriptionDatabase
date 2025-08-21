@@ -14,7 +14,8 @@ public final class DAOException extends RuntimeException {
 
     /**
      * Constructs a new DAOException with no detail message.
-     * This constructor is used when the exception is thrown without a specific message.
+     * This constructor is used when the exception is thrown without a specific
+     * message.
      */
     public DAOException(String message) {
         super(message);
@@ -22,7 +23,8 @@ public final class DAOException extends RuntimeException {
 
     /**
      * Constructs a new DAOException with the specified cause.
-     * This constructor is used when the exception is thrown due to another exception.
+     * This constructor is used when the exception is thrown due to another
+     * exception.
      *
      * @param cause the cause of the exception
      */
@@ -32,7 +34,8 @@ public final class DAOException extends RuntimeException {
 
     /**
      * Constructs a new DAOException with the specified detail message and cause.
-     * This constructor is used when the exception is thrown with both a specific message and a cause.
+     * This constructor is used when the exception is thrown with both a specific
+     * message and a cause.
      *
      * @param message the detail message
      * @param cause   the cause of the exception
