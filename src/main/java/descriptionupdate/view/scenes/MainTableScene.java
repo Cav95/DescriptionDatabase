@@ -23,8 +23,8 @@ public class MainTableScene extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    @SuppressWarnings("unused")
-    private boolean isSaved;
+    //@SuppressWarnings("unused")
+    //private boolean isSaved;
 
     private String itaDescription;
     private String engDescription;
@@ -53,9 +53,9 @@ public class MainTableScene extends JPanel {
      * @param view the main view of the application
      * @param isSaved whether the scene is saved or not
      */
-    public MainTableScene(View view, boolean isSaved) {
+    public MainTableScene(View view) {
         this.view = view;
-        this.isSaved = isSaved; // Initialize as saved
+       // this.isSaved = isSaved; // Initialize as saved
         this.itaDescription = ALL;
         this.engDescription = ALL;
         this.group = ALL;
@@ -63,7 +63,7 @@ public class MainTableScene extends JPanel {
         listGroup = view.getController().getAllGroupTypeString();
         listGroup.add(0, "");
         this.groupTextField = GuiFactory.getComboBox(listGroup);
-        initial(view, isSaved);
+        initial(view);
 
     }
 
@@ -76,9 +76,9 @@ public class MainTableScene extends JPanel {
      * @param engDescription English description to filter
      * @param group group to filter
      */
-    public MainTableScene(View view, boolean isSaved, String itaDescription, String engDescription, String group) {
+    public MainTableScene(View view,String itaDescription, String engDescription, String group) {
         this.view = view;
-        this.isSaved = true; // Initialize as saved
+       // this.isSaved = true; // Initialize as saved
         this.itaDescription = itaDescription + ALL;
         this.engDescription = engDescription + ALL;
         this.group = group;
@@ -91,10 +91,10 @@ public class MainTableScene extends JPanel {
         this.groupTextField = GuiFactory.getComboBox(listGroup);
 
         this.groupTextField.setSelectedItem(reversBlankReturn(group));
-        initial(view, true);
+        initial(view);
     }
 
-    private void initial(View view, boolean isSaved) {
+    private void initial(View view) {
         this.setLayout(new BorderLayout());
 
         // North: Title panel
@@ -154,7 +154,8 @@ public class MainTableScene extends JPanel {
                             String ita = (String) table.getValueAt(selectedRow, 1);
                             String eng = (String) table.getValueAt(selectedRow, 2);
                             view.getController().deleteDescription(new Description(ita, eng, group));
-                            view.getController().initialScene(false);
+                            view.getController().setSaved(false); // Mark as not saved
+                            view.getController().initialScene();
                         } else {
                             throw new IllegalStateException("No request selected for management");
                         }
@@ -184,6 +185,7 @@ public class MainTableScene extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             view.getController().save();
+                            view.getController().setSaved(true); // Mark as saved after successful save
                             JOptionPane.showMessageDialog(MainTableScene.this, "Changes saved successfully!");
                             // isSaved = true; // Mark as saved after successful save
                         } catch (Exception ex) {
@@ -197,7 +199,7 @@ public class MainTableScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (isSaved) {
+                        if (view.getController().isSaved()) {
                             view.exitApplication();
                         } else {
 
@@ -239,7 +241,7 @@ public class MainTableScene extends JPanel {
                         if (group.isBlank()) {
                             group = ALL;
                         }
-                        view.goToInitialSceneFiltered(isSaved, ita, eng, group);
+                        view.goToInitialSceneFiltered(ita, eng, group);
                     }
                 });
         JButton resetButton = GuiFactory.getButtom("ResetFilter", Color.GRAY, Color.BLACK, Font.getFont(FONT),
@@ -249,7 +251,8 @@ public class MainTableScene extends JPanel {
                         itaTextField.setText("");
                         engTextField.setText("");
                         groupTextField.setSelectedIndex(0);
-                        view.goToInitialScene(isSaved);
+                        view.getController().setSaved(true);
+                        view.goToInitialScene();
                     }
                 });
         southPanel.add(Box.createHorizontalStrut(10));

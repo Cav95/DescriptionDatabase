@@ -51,7 +51,7 @@ public class LogInScene extends JPanel {
         mainPanel.add(GuiFactory.getButtom("Accedi", Color.GRAY, Color.BLACK, Font.getFont(FONT), new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-               view.getController().initialScene(true);
+               view.getController().initialScene();
             }
         }));
 

@@ -102,8 +102,9 @@ public class UpdateDescriptionDialog extends JDialog {
                                                                         + itaTextField.getText().toUpperCase() + " - "
                                                                         + engTextField.getText().toUpperCase() + " - "
                                                                         + exGroup);
-                                        isUpdated = true; // Mark as updated
-                                        view.getController().initialScene(false);
+                                        //isUpdated = true; // Mark as updated
+                                        view.getController().setSaved(false); // Mark as not saved
+                                        view.getController().initialScene();
                                         UpdateDescriptionDialog.this.dispose();
 
                                 } catch (Exception ex) {

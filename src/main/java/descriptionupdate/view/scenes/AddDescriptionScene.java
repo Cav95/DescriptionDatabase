@@ -90,7 +90,8 @@ public class AddDescriptionScene extends JDialog {
                                     "Errore Descrizione Già Presente ");
                                     throw new IllegalArgumentException();
                         } finally {
-                            view.getController().initialScene(false);
+                            view.getController().setSaved(false); // Mark as not saved
+                            view.getController().initialScene();
                             AddDescriptionScene.this.dispose();
                             
                         }
@@ -100,7 +101,7 @@ public class AddDescriptionScene extends JDialog {
         mainPanel.add(GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, Font.getFont(FONT), new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                view.getController().initialScene(false);
+                view.getController().initialScene();
                 AddDescriptionScene.this.dispose();
             }
         }));

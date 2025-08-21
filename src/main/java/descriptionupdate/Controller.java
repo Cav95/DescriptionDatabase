@@ -25,6 +25,16 @@ public final class Controller {
     private final Model model;
     private final View view;
 
+    private boolean isSaved;
+
+    public boolean isSaved() {
+        return isSaved;
+    }
+
+    public void setSaved(boolean isSaved) {
+        this.isSaved = isSaved;
+    }
+
     /**
      * Constructs a Controller with the specified model and view.
      *
@@ -37,6 +47,7 @@ public final class Controller {
         Objects.requireNonNull(view, "Controller created with null view");
         this.view = view;
         this.model = model;
+        this.isSaved = true;
     }
 
     /**
@@ -44,9 +55,9 @@ public final class Controller {
      *
      * @param isSaved whether the scene is saved or not
      */
-    public void initialScene(final Boolean isSaved) {
+    public void initialScene() {
         LOGGER.info("Initial scene");
-        view.goToInitialScene(isSaved);
+        view.goToInitialScene();
 
     }
 
@@ -128,7 +139,7 @@ public final class Controller {
     public void save() {
         LOGGER.info("Saving changes to the database");
         model.save();
-        view.goToInitialScene(true); // Navigate to the main table scene after saving
+        view.goToInitialScene(); // Navigate to the main table scene after saving
     }
 
     /**
