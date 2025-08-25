@@ -27,10 +27,20 @@ public final class Controller {
 
     private boolean isSaved;
 
+    /**
+     * Indicates whether the current scene is saved or not.
+     *
+     * @return true if the scene is saved, false otherwise
+     */
     public boolean isSaved() {
         return isSaved;
     }
 
+    /**
+     * Sets the saved state of the current scene.
+     *
+     * @param isSaved true if the scene is saved, false otherwise
+     */
     public void setSaved(boolean isSaved) {
         this.isSaved = isSaved;
     }

@@ -31,7 +31,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
 
     // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
-        runtimeOnly("com.microsoft.sqlserver:mssql-jdbc:13.2.0.jre11")
+        implementation("com.microsoft.sqlserver:mssql-jdbc:13.2.0.jre11")
 }
 
 java {

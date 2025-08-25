@@ -23,7 +23,7 @@ public final class DescriptionUpdateMain {
     public static void main(String[] args) throws SQLException {
 
         Connection connection;
-        try {
+       /* try {
             //connection = DAOUtils.localMySQLConnection("DesFusion", "root", "");
             //connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001", "edm2008", "edm2008");
             connection = DAOUtils.localIniStringConnection();
@@ -31,17 +31,17 @@ public final class DescriptionUpdateMain {
             new ConnectionFailureViewIni();
             return;
         }
-        connection.setAutoCommit(false);
+        connection.setAutoCommit(false);*/
 
-        var model = new Model(connection);
+      //  var model = new Model(connection);
         var view = new View(() -> {
             try {
-                connection.close();
+                //connection.close();
             } catch (Exception ignored) {
             }
         });
-        var controller = new Controller(model, view);
-        view.setController(controller);
+      //  var controller = new Controller(model, view);
+     //   view.setController(controller);
        // view.goToInitialScene();
         // controller.initialScene();
     }
