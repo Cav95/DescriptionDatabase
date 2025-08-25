@@ -9,8 +9,17 @@ import descriptionupdate.model.Model;
 import descriptionupdate.view.View;
 import descriptionupdate.view.utils.ConnectionFailureViewIni;
 
+/**
+ * Main entry point for the Description Update application.
+ */
 public final class DescriptionUpdateMain {
 
+    /**
+     * Main method for the Description Update application.
+     *
+     * @param args command-line arguments
+     * @throws SQLException if a database access error occurs
+     */
     public static void main(String[] args) throws SQLException {
 
         Connection connection;

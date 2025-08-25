@@ -42,6 +42,7 @@ public class GuiFactory {
 
     /**
      * Creates a JTextField with the specified number of columns.
+     * @param i the number of columns for the text field
      */
     public static JTextField getTextField(int i) {
         JTextField textField = new JTextField(i);
@@ -50,6 +51,7 @@ public class GuiFactory {
 
     /**
      * Creates a JComboBox with the specified list of strings.
+     * @param allGroupTypeString the list of strings to populate the combo box
      */
     public static JComboBox<String> getComboBox(List<String> allGroupTypeString) {
         return new JComboBox<>(allGroupTypeString.toArray(new String[0]));

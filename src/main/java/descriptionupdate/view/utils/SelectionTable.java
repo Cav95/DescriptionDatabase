@@ -39,6 +39,9 @@ public class SelectionTable extends JTable {
         this.setEnabled(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setModel(TableModel model) {
         super.setModel(model);

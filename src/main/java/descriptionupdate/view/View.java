@@ -17,6 +17,9 @@ import descriptionupdate.view.scenes.MainTableScene;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * Main application view.
+ */
 public final class View {
 
     private static final String SN_WELCOME = "welcome";
@@ -30,6 +33,11 @@ public final class View {
     private final JPanel mainPanel;
     private final CardLayout cardLayout;
 
+    /**
+     * Constructs a new View instance.
+     *
+     * @param onClose a Runnable to be executed when the window is closed
+     */
     public View(Runnable onClose) {
         this.controller = Optional.empty();
         this.mainFrame = new JFrame("Description Database");
@@ -61,10 +69,19 @@ public final class View {
                 });
     }
 
+    /**
+     * Returns the main frame of the application.
+     * @return the main frame
+     */
     public JFrame getMainFrame() {
         return this.mainFrame;
     }
 
+    /**
+     * Returns the Controller associated with this View.
+     *
+     * @return the Controller
+     */
     public Controller getController() {
         if (this.controller.isPresent()) {
             return this.controller.get();
@@ -84,22 +101,41 @@ public final class View {
         this.controller = Optional.of(controller);
     }
 
+    /**
+     * Navigates to the initial scene of the application.
+     */
     public void goToInitialScene() {
         this.mainPanel.add(new MainTableScene(this), SN_WELCOME);
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
+    /**
+     * Navigates to the initial scene of the application with filters applied.
+     *
+     * @param itaDescription the Italian description filter
+     * @param engDescription the English description filter
+     * @param group         the group filter
+     */
         public void goToInitialSceneFiltered(String itaDescription, String engDescription, String group) {
         this.mainPanel.add(new MainTableScene(this ,itaDescription , engDescription ,group ), SN_WELCOME);
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
+    /**
+     * Exits the application.
+     */
         public void exitApplication() {
         System.exit(0);
     }
+    /**
+     * Navigates to the add scene of the application.
+     */
         public void goToAddScene() {
         this.mainPanel.add(new AddDescriptionScene(this), ADD_SCENE);
         this.cardLayout.show(this.mainPanel, ADD_SCENE);
     }
 
+    /**
+     * Navigates to the second scene of the application.
+     */
     public void goToSecondScene() {
         this.mainPanel.add(new LogInScene(this), SN_SECOND);
         this.cardLayout.show(this.mainPanel, SN_SECOND);
