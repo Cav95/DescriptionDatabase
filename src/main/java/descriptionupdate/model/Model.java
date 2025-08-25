@@ -8,6 +8,11 @@ import descriptionupdate.data.DescriptionDAOImpl;
 import descriptionupdate.data.api.dao.DescriptionDAO;
 import descriptionupdate.model.api.Description;
 
+/**
+ * The Model class represents the data and business logic of the application.
+ * It interacts with the database through the DescriptionDAO to perform CRUD operations
+ * on descriptions.
+ */
 public final class Model {
 
     private final Connection connection;
