@@ -14,9 +14,6 @@ import descriptionupdate.view.scenes.AddDescriptionScene;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 /**
  * Main application view.
  */
@@ -38,7 +35,7 @@ public final class View {
      *
      * @param onClose a Runnable to be executed when the window is closed
      */
-    public View(Runnable onClose) {
+    public View() {
         this.controller = Optional.empty();
         this.mainFrame = new JFrame("Description Database");
         this.mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -60,13 +57,13 @@ public final class View {
         this.mainFrame.setLocationByPlatform(true);
         this.mainFrame.setVisible(true);
 
-        this.mainFrame.addWindowListener(
+        /*this.mainFrame.addWindowListener(
                 new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {
                         onClose.run();
                         System.exit(0);
                     }
-                });
+                });*/
     }
 
     /**

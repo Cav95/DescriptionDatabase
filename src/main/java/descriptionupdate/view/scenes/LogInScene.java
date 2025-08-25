@@ -24,6 +24,7 @@ public class LogInScene extends JPanel {
 
     @SuppressWarnings("unused")
     private final View view;
+    private Connection connection;
 
     /**
      * Constructor for LogInScene.
@@ -75,28 +76,26 @@ public class LogInScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
-                        String username = userField.getText();
-                        String password = new String(passField.getPassword());
                         // Effettua il login
-                        Connection connection;
+
                         try {
-                            connection = DAOUtils.localMySQLConnection("DesFusion", username, password);
-                            // connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001", "edm2008",
-                            // "edm2008");
-                            // connection = DAOUtils.localIniStringConnection();
-                            try {
-                                connection.setAutoCommit(false);
-                            } catch (SQLException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                            }
+                            //connection = DAOUtils.localMySQLConnection("DesFusion",
+                             //       userField.getText(), new String(passField.getPassword()));
+                            // connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
+                            // userField.getText(), new String(passField.getPassword()));
+                            connection = DAOUtils.localIniStringConnection();
+
                         } catch (DAOException ex) {
                             new ConnectionFailureViewIni();
                             return;
                         }
+                        try {
+                            connection.setAutoCommit(false);
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
 
-                        var model = new Model(connection);
-                        var controller = new Controller(model, view);
+                        var controller = new Controller(new Model(connection), view);
                         view.setController(controller);
                         view.getController().initialScene();
                     }
