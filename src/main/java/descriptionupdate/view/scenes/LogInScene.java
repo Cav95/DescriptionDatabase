@@ -24,6 +24,7 @@ public class LogInScene extends JPanel {
 
     private JPanel northPanel = new JPanel();
     private JPanel centerPanel = new JPanel();
+    private JPanel buttonPanel = new JPanel();
     private JLabel titleLabel = new JLabel("Description Database");
     private JLabel userLabel = new JLabel("Username:");
     private JLabel passLabel = new JLabel("Password:");
@@ -81,19 +82,24 @@ public class LogInScene extends JPanel {
                 "Accedi",
                 Color.GRAY,
                 Color.BLACK,
-                new Font(FONT, Font.BOLD, 22),
+                GuiFactory.getFont(Font.BOLD, 22),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         // Effettua il login
 
                         try {
+                            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                             // connection = DAOUtils.localMySQLConnection("DesFusion",
                             // userField.getText(), new String(passField.getPassword()));
                             // connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
                             // userField.getText(), new String(passField.getPassword()));
                             connection = DAOUtils.localIniStringConnection();
 
+                        } catch (ClassNotFoundException ex) {
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Driver SQL Server non trovato.", "Errore",
+                                    JOptionPane.ERROR_MESSAGE);
                         } catch (DAOException ex) {
                             new ConnectionFailureViewIni();
                             return;
@@ -104,13 +110,12 @@ public class LogInScene extends JPanel {
                             e1.printStackTrace();
                         }
 
-                        var controller = new Controller(new Model(connection), view);
-                        view.setController(controller);
+                        view.setController(new Controller(new Model(connection), view));
                         view.getController().initialScene();
                     }
                 });
 
-        JButton exitButton = GuiFactory.getButtom("Exit", Color.GRAY, Color.BLACK, new Font(FONT, Font.BOLD, 22),
+        JButton exitButton = GuiFactory.getButtom("Exit", Color.GRAY, Color.BLACK, GuiFactory.getFont(Font.BOLD, 22),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -120,7 +125,7 @@ public class LogInScene extends JPanel {
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Pulsanti allineati orizzontalmente
-        JPanel buttonPanel = new JPanel();
+
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -136,7 +141,7 @@ public class LogInScene extends JPanel {
         centerPanel.add(passLabel);
         centerPanel.add(passField);
         centerPanel.add(Box.createVerticalStrut(20));
-        centerPanel.add(buttonPanel); // aggiungi qui il nuovo pannello
+        centerPanel.add(buttonPanel);
         centerPanel.add(Box.createVerticalGlue());
 
         this.add(centerPanel, BorderLayout.CENTER);
