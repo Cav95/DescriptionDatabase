@@ -109,14 +109,34 @@ public class LogInScene extends JPanel {
                         view.getController().initialScene();
                     }
                 });
-        accediButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton exitButton = GuiFactory.getButtom("Exit", Color.GRAY, Color.BLACK, new Font(FONT, Font.BOLD, 22),
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(java.awt.event.ActionEvent e) {
+                        System.exit(0);
+                    }
+                });
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Pulsanti allineati orizzontalmente
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.setOpaque(false);
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(accediButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        buttonPanel.add(exitButton);
+        buttonPanel.add(Box.createHorizontalGlue());
 
         centerPanel.add(userLabel);
         centerPanel.add(userField);
         centerPanel.add(passLabel);
         centerPanel.add(passField);
         centerPanel.add(Box.createVerticalStrut(20));
-        centerPanel.add(accediButton);
+        centerPanel.add(buttonPanel); // aggiungi qui il nuovo pannello
         centerPanel.add(Box.createVerticalGlue());
 
         this.add(centerPanel, BorderLayout.CENTER);
