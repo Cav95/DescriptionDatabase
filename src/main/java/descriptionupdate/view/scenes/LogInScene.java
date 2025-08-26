@@ -110,14 +110,24 @@ public class LogInScene extends JPanel {
                 });
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        // Pulsanti allineati orizzontalmente
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.setOpaque(false);
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(accediButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        buttonPanel.add(exitButton);
+        buttonPanel.add(Box.createHorizontalGlue());
+
         centerPanel.add(userLabel);
         centerPanel.add(userField);
         centerPanel.add(passLabel);
         centerPanel.add(passField);
         centerPanel.add(Box.createVerticalStrut(20));
-        centerPanel.add(accediButton);
-        centerPanel.add(Box.createVerticalStrut(10));
-        centerPanel.add(exitButton);
+        centerPanel.add(buttonPanel); // aggiungi qui il nuovo pannello
         centerPanel.add(Box.createVerticalGlue());
 
         this.add(centerPanel, BorderLayout.CENTER);
