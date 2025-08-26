@@ -17,6 +17,9 @@ import java.util.List;
  * the application.
  */
 public class MainTableScene extends JPanel {
+    private static final String ING_TAB_NAME = "ING";
+    private static final String ITA_TAB_NAME = "ITA";
+    private static final String GROUP_TAB_NAME = "GROUP";
     private static final String ALL = "%";
     private static final String FONT = "Roboto";
 
@@ -77,7 +80,6 @@ public class MainTableScene extends JPanel {
      */
     public MainTableScene(View view, String itaDescription, String engDescription, String group) {
         this.view = view;
-        // this.isSaved = true; // Initialize as saved
         this.itaDescription = itaDescription + ALL;
         this.engDescription = engDescription + ALL;
         this.group = group;
@@ -119,7 +121,7 @@ public class MainTableScene extends JPanel {
                         })
                         .toArray(Object[][]::new),
                 new String[] {
-                        "GROUP", "ITA", "ING"
+                        GROUP_TAB_NAME, ITA_TAB_NAME, ING_TAB_NAME
                 });
         table.setFont(new Font(FONT, Font.PLAIN, 12));
         table.getColumnModel().getColumn(0).setPreferredWidth(170);
@@ -186,7 +188,6 @@ public class MainTableScene extends JPanel {
                             view.getController().save();
                             view.getController().setSaved(true); // Mark as saved after successful save
                             JOptionPane.showMessageDialog(MainTableScene.this, "Changes saved successfully!");
-                            // isSaved = true; // Mark as saved after successful save
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(MainTableScene.this,
                                     "Error saving changes: " + ex.getMessage(),
