@@ -2,6 +2,7 @@ package descriptionupdate.view.utils;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import java.awt.Color;
@@ -55,6 +56,16 @@ public class GuiFactory {
      */
     public static JComboBox<String> getComboBox(List<String> allGroupTypeString) {
         return new JComboBox<>(allGroupTypeString.toArray(new String[0]));
+    }
+
+    public static JLabel getLabel(String text, Font font) {
+        JLabel label = new JLabel(text);
+        label.setFont(font);
+        return label;
+    }
+
+    public static Font getFont(int style, int size) {
+        return new Font(FONT, style, size);
     }
 
 }

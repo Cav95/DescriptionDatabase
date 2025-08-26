@@ -18,11 +18,24 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * AddDescriptionScene class that extends JDialog to allow users to add a new description.
+ * AddDescriptionScene class that extends JDialog to allow users to add a new
+ * description.
  */
 public class AddDescriptionScene extends JDialog {
 
+    private static final int SIZE_FONT = 18;
+
     private static final String FONT = "Roboto";
+
+    final JPanel mainPanel = new JPanel();
+    private JPanel northPanel = new JPanel();
+    private JLabel titleLabel = new JLabel("Add Description Scene");
+    private JLabel itaLabel = GuiFactory.getLabel("ITA Description:", GuiFactory.getFont(Font.PLAIN, SIZE_FONT));
+    private JLabel engLabel = GuiFactory.getLabel("ENG Description:", GuiFactory.getFont(Font.PLAIN, SIZE_FONT));
+    private JLabel groupLabel = GuiFactory.getLabel("Group", GuiFactory.getFont(Font.PLAIN, SIZE_FONT));
+    private JTextField itaTextField = GuiFactory.getTextField(20);
+    private JTextField engTextField = GuiFactory.getTextField(20);
+    private JComboBox<String> groupTextField;
 
     @SuppressWarnings("unused")
     private final View view;
@@ -35,33 +48,26 @@ public class AddDescriptionScene extends JDialog {
     public AddDescriptionScene(View view) {
         this.view = view;
 
-                        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                this.setSize(1200, 500);
-                this.setMaximumSize(this.getSize());
-                this.setLocationRelativeTo(view.getMainFrame());
-                this.setResizable(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setSize(1200, 500);
+        this.setMaximumSize(this.getSize());
+        this.setLocationRelativeTo(view.getMainFrame());
+        this.setResizable(true);
 
         this.setLayout(new BorderLayout());
 
-        JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
-        JLabel titleLabel = new JLabel("Add Description Scene");
+
         titleLabel.setFont(new Font(FONT, Font.BOLD, 24));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
 
-        final JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
-        JLabel itaLabel = new JLabel("ITA Description:");
-        JLabel engLabel = new JLabel("ENG Description:");
-        JLabel groupLabel = new JLabel("Group:");
 
-        JTextField itaTextField = GuiFactory.getTextField(20);
-        JTextField engTextField = GuiFactory.getTextField(20);
-        JComboBox<String> groupTextField = GuiFactory.getComboBox(view.getController().getAllGroupTypeString());
+        groupTextField = GuiFactory.getComboBox(view.getController().getAllGroupTypeString());
         mainPanel.add(itaLabel);
         mainPanel.add(itaTextField);
 
@@ -88,12 +94,12 @@ public class AddDescriptionScene extends JDialog {
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(AddDescriptionScene.this,
                                     "Errore Descrizione Già Presente ");
-                                    throw new IllegalArgumentException();
+                            throw new IllegalArgumentException();
                         } finally {
                             view.getController().setSaved(false); // Mark as not saved
                             view.getController().initialScene();
                             AddDescriptionScene.this.dispose();
-                            
+
                         }
 
                     }

@@ -26,6 +26,9 @@ public class MainTableScene extends JPanel {
     private String engDescription;
     private String group;
 
+    private JPanel northPanel = new JPanel();
+    private JPanel southPanel = new JPanel();
+
     private JLabel desFilter = new JLabel("Filtro Descrizione:");
     private JTextField itaTextField = GuiFactory.getTextField(20);
     private JLabel engFilter = new JLabel("Filtro Inglese:");
@@ -39,6 +42,8 @@ public class MainTableScene extends JPanel {
     private JButton updateButton;
     private JButton saveButton;
     private JButton exitButton;
+
+    private JLabel titleLabel = new JLabel("TABELLA DESCRIZIONI");
 
     @SuppressWarnings("unused")
     private final View view;
@@ -92,10 +97,10 @@ public class MainTableScene extends JPanel {
         this.setLayout(new BorderLayout());
 
         // North: Title panel
-        JPanel northPanel = new JPanel();
+
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
-        JLabel titleLabel = new JLabel("TABELLA DESCRIZIONI");
+
         titleLabel.setFont(new Font(FONT, Font.BOLD, 24));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(titleLabel);
@@ -126,7 +131,7 @@ public class MainTableScene extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
 
         // South: Panel with 4 buttons
-        JPanel southPanel = new JPanel();
+
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 

@@ -22,6 +22,15 @@ public class LogInScene extends JPanel {
 
     private static final String FONT = "Roboto";
 
+    private JPanel northPanel = new JPanel();
+    private JPanel centerPanel = new JPanel();
+    private JLabel titleLabel = new JLabel("Description Database");
+    private JLabel userLabel = new JLabel("Username:");
+    private JLabel passLabel = new JLabel("Password:");
+    private JTextField userField = new JTextField(20);
+    private JPasswordField passField = new JPasswordField(20);
+    private JButton accediButton;
+
     @SuppressWarnings("unused")
     private final View view;
     private Connection connection;
@@ -37,38 +46,38 @@ public class LogInScene extends JPanel {
         this.setPreferredSize(new Dimension(600, 400)); // Pannello più grande
 
         // Titolo dell'applicazione in alto
-        JPanel northPanel = new JPanel();
+
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
-        JLabel titleLabel = new JLabel("Description Database");
+
         titleLabel.setFont(new Font(FONT, Font.BOLD, 32));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
 
         // Pulsante e campi centrati
-        JPanel centerPanel = new JPanel();
+
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setBorder(BorderFactory.createEmptyBorder(60, 20, 60, 20));
         centerPanel.setOpaque(false);
 
         // Label e campo utente
-        JLabel userLabel = new JLabel("Username:");
+
         userLabel.setFont(new Font(FONT, Font.PLAIN, 18));
         userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JTextField userField = new JTextField(20);
+
         userField.setMaximumSize(new Dimension(300, 30));
         userField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Label e campo password
-        JLabel passLabel = new JLabel("Password:");
+
         passLabel.setFont(new Font(FONT, Font.PLAIN, 18));
         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JPasswordField passField = new JPasswordField(20);
+
         passField.setMaximumSize(new Dimension(300, 30));
         passField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton accediButton = GuiFactory.getButtom(
+        accediButton = GuiFactory.getButtom(
                 "Accedi",
                 Color.GRAY,
                 Color.BLACK,
@@ -79,8 +88,8 @@ public class LogInScene extends JPanel {
                         // Effettua il login
 
                         try {
-                            //connection = DAOUtils.localMySQLConnection("DesFusion",
-                             //       userField.getText(), new String(passField.getPassword()));
+                            // connection = DAOUtils.localMySQLConnection("DesFusion",
+                            // userField.getText(), new String(passField.getPassword()));
                             // connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
                             // userField.getText(), new String(passField.getPassword()));
                             connection = DAOUtils.localIniStringConnection();
