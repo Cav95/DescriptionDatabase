@@ -79,8 +79,8 @@ public class LogInScene extends JPanel {
                         // Effettua il login
 
                         try {
-                            //connection = DAOUtils.localMySQLConnection("DesFusion",
-                             //       userField.getText(), new String(passField.getPassword()));
+                            // connection = DAOUtils.localMySQLConnection("DesFusion",
+                            // userField.getText(), new String(passField.getPassword()));
                             // connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
                             // userField.getText(), new String(passField.getPassword()));
                             connection = DAOUtils.localIniStringConnection();
@@ -100,7 +100,15 @@ public class LogInScene extends JPanel {
                         view.getController().initialScene();
                     }
                 });
-        accediButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton exitButton = GuiFactory.getButtom("Exit", Color.GRAY, Color.BLACK, new Font(FONT, Font.BOLD, 22),
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(java.awt.event.ActionEvent e) {
+                        System.exit(0);
+                    }
+                });
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         centerPanel.add(userLabel);
         centerPanel.add(userField);
@@ -108,6 +116,8 @@ public class LogInScene extends JPanel {
         centerPanel.add(passField);
         centerPanel.add(Box.createVerticalStrut(20));
         centerPanel.add(accediButton);
+        centerPanel.add(Box.createVerticalStrut(10));
+        centerPanel.add(exitButton);
         centerPanel.add(Box.createVerticalGlue());
 
         this.add(centerPanel, BorderLayout.CENTER);
