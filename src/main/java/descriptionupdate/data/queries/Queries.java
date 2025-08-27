@@ -6,47 +6,47 @@ package descriptionupdate.data.queries;
 public final class Queries {
 
         /**
-         * SQL query to retrieve all records from the DESCRIZIONEGRUPPI table.
+         * SQL query to retrieve all records from the DescrizioniGruppi table.
          */
         public static final String GET_ALL_TABLE = """
                         select *
-                        from DESCRIZIONEGRUPPI
+                        from DescrizioniGruppi
                         where Descrizione like ?
                         and INGLESE like ?
                         and Gruppo like ?
-                        order by 4,2,3;
+                        order by 1,2,3;
                                     """;
         /**
-         * SQL query to retrieve a single record from the DESCRIZIONEGRUPPI table.
+         * SQL query to retrieve a single record from the DescrizioniGruppi table.
          */
         public static final String GET_ONE_DES = """
                         SELECT *
-                        FROM DESCRIZIONEGRUPPI
+                        FROM DescrizioniGruppi
                         where Descrizione = ?
                         AND INGLESE = ?
                         AND Gruppo = ?;
                                     """;
         /**
-         * SQL query to insert a new record into the DESCRIZIONEGRUPPI table.
+         * SQL query to insert a new record into the DescrizioniGruppi table.
          */
         public static final String INSERT_ONE_DES = """
-                        INSERT INTO DESCRIZIONEGRUPPI (Descrizione, INGLESE ,Gruppo ) VALUES
+                        INSERT INTO DescrizioniGruppi (Descrizione, INGLESE ,Gruppo ) VALUES
                         (?, ?, ?);
                                     """;
         /**
-         * SQL query to delete a record from the DESCRIZIONEGRUPPI table.
+         * SQL query to delete a record from the DescrizioniGruppi table.
          */
         public static final String DELETE_ONE_DES = """
-                                    delete FROM DESCRIZIONEGRUPPI
+                                    delete FROM DescrizioniGruppi
                         where Descrizione = ?
                         AND INGLESE = ?
                         AND Gruppo = ?;
                                                 """;
         /**
-         * SQL query to update a record in the DESCRIZIONEGRUPPI table.
+         * SQL query to update a record in the DescrizioniGruppi table.
          */
         public static final String UPDATE_ONE_DES = """
-                        update DESCRIZIONEGRUPPI
+                        update DescrizioniGruppi
                          SET Descrizione = ?
                          , INGLESE = ?
                          where Descrizione = ?
@@ -54,12 +54,12 @@ public final class Queries {
                          AND Gruppo = ?;
                                      """;
         /**
-         * SQL query to retrieve all distinct group types from the DESCRIZIONEGRUPPI
+         * SQL query to retrieve all distinct group types from the DescrizioniGruppi
          * table.
          */
         public static final String ALL_GROUP_TYPE_STRING = """
                         SELECT DISTINCT Gruppo
-                         FROM DESCRIZIONEGRUPPI
+                         FROM DescrizioniGruppi
                          WHERE Gruppo IS NOT NULL
                          ORDER BY Gruppo;
                                      """;
