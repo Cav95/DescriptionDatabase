@@ -156,7 +156,13 @@ public class MainTableScene extends JPanel {
                             String eng = (String) table.getValueAt(selectedRow, 2);
                             view.getController().deleteDescription(new Description(ita, eng, group));
                             view.getController().setSaved(false); // Mark as not saved
-                            view.getController().initialScene();
+                            var groupFilter = groupTextField.getSelectedItem().toString().toUpperCase();
+
+                            if (groupFilter.isBlank()) {
+                                groupFilter = ALL;
+                            }
+                            view.goToInitialSceneFiltered(blankReturn(itaTextField), blankReturn(engTextField),
+                                    groupFilter);
                         } else {
                             throw new IllegalStateException("No request selected for management");
                         }
