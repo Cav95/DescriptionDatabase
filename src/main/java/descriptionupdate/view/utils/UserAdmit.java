@@ -5,13 +5,14 @@ package descriptionupdate.view.utils;
  * Each user is identified by a unique name.
  */
 public enum UserAdmit {
-    CAVINAM("mcavina"),
-    MATTI("matti");
+    CEPIUT("CEPIUT","CEPIUT");
 
-    private final String name;
+    private final String username;
+    private final String psw;
 
-    UserAdmit(String name) {
-        this.name = name;
+    UserAdmit(String username, String psw) {
+        this.username = username;
+        this.psw = psw;
     }
 
     /**
@@ -19,8 +20,17 @@ public enum UserAdmit {
      *
      * @return the name of the user
      */
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
-    
+
+    /**
+     * Returns the ID of the user.
+     *
+     * @return the ID of the user
+     */
+    public String getPsw() {
+        return psw;
+    }
+
 }

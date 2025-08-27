@@ -83,23 +83,19 @@ public class AddDescriptionScene extends JDialog {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         try {
-                            view.getController().addDescription(
-                                    new Description(itaTextField.getText().toUpperCase(),
-                                            engTextField.getText().toUpperCase(),
-                                            groupTextField.getSelectedItem().toString().toUpperCase()));
-                            JOptionPane.showMessageDialog(AddDescriptionScene.this,
-                                    "Descrizione Aggiunta con Successo\n" + itaTextField.getText().toUpperCase() + " - "
-                                            + engTextField.getText().toUpperCase() + " - "
-                                            + groupTextField.getSelectedItem().toString().toUpperCase());
+                            var newDescription = new Description(itaTextField.getText().toUpperCase(),
+                                    engTextField.getText().toUpperCase(),
+                                    groupTextField.getSelectedItem().toString().toUpperCase());
+                            view.getController().addDescription(newDescription);
+                            successfullyAddedDescription(newDescription);
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(AddDescriptionScene.this,
                                     "Errore Descrizione Già Presente ");
                             throw new IllegalArgumentException();
                         } finally {
                             view.getController().setSaved(false); // Mark as not saved
-                            view.goToInitialScene();;
+                            view.goToInitialScene();
                             AddDescriptionScene.this.dispose();
-
                         }
 
                     }
@@ -114,4 +110,9 @@ public class AddDescriptionScene extends JDialog {
 
     }
 
+    private void successfullyAddedDescription(Description description) {
+        JOptionPane.showMessageDialog(this,
+                "Descrizione Aggiunta con Successo\n" + description.itaDescripion() + " - "
+                        + description.engDescription() + " - " + description.group());
+    }
 }

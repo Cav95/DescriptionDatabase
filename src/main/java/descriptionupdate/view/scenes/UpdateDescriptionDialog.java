@@ -95,29 +95,34 @@ public class UpdateDescriptionDialog extends JDialog {
                                 new ActionListener() {
                                         @Override
                                         public void actionPerformed(final ActionEvent e) {
+
                                                 try {
-                                                        var itaDes = itaTextField.getText().toUpperCase();
-                                                        var engDes = engTextField.getText().toUpperCase();
-                                                        view.getController().updateDescription(
-                                                                        new Description(exIta, exEng, exGroup),
-                                                                        new Description(itaDes, engDes, exGroup));
-                                                        JOptionPane.showMessageDialog(UpdateDescriptionDialog.this,
-                                                                        "Description updated successfully!\n"
-                                                                                        + itaDes + " - "
-                                                                                        + engDes + " - "
-                                                                                        + exGroup);
+                                                        var newDescription = new Description(
+                                                                        itaTextField.getText().toUpperCase(),
+                                                                        engTextField.getText().toUpperCase(), exGroup);
+                                                        var oldDescription = new Description(exIta, exEng, exGroup);
+                                                        view.getController().updateDescription(oldDescription,
+                                                                        newDescription);
+                                                        successfullyAddedDescription(newDescription);
                                                         view.getController().setSaved(false); // Mark as not saved
                                                         view.goToInitialScene();
                                                         UpdateDescriptionDialog.this.dispose();
 
                                                 } catch (Exception ex) {
                                                         JOptionPane.showMessageDialog(UpdateDescriptionDialog.this,
-                                                                        "Errore " + ex.getMessage());
+                                                                        "Errore Descrizione Già Presente "
+                                                                                        + ex.getMessage());
                                                 }
                                         }
 
                                 });
                 bottomPanel.add(update);
+        }
+
+        private void successfullyAddedDescription(Description description) {
+                JOptionPane.showMessageDialog(this,
+                                "Descrizione Aggiunta con Successo\n" + description.itaDescripion() + " - "
+                                                + description.engDescription() + " - " + description.group());
         }
 
 }

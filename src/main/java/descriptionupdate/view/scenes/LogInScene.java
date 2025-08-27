@@ -1,10 +1,14 @@
 package descriptionupdate.view.scenes;
 
 import javax.swing.*;
+
+import org.slf4j.Logger;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import descriptionupdate.Controller;
 import descriptionupdate.data.utils.DAOException;
@@ -13,12 +17,17 @@ import descriptionupdate.model.Model;
 import descriptionupdate.view.View;
 import descriptionupdate.view.utils.ConnectionFailureViewIni;
 import descriptionupdate.view.utils.GuiFactory;
+import descriptionupdate.view.utils.UserAdmit;
 
 /**
  * LogInScene class that extends JPanel to create a login scene for the
  * application.
  */
 public class LogInScene extends JPanel {
+
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(LogInScene.class);
+
+    private static final String PDM_USER = "PDMUser";
 
     private static final String FONT = "Roboto";
 
@@ -32,8 +41,6 @@ public class LogInScene extends JPanel {
     private JPasswordField passField = new JPasswordField(20);
     private JButton accediButton;
 
-    @SuppressWarnings("unused")
-    private final View view;
     private Connection connection;
 
     /**
@@ -42,7 +49,6 @@ public class LogInScene extends JPanel {
      * @param view the main view of the application
      */
     public LogInScene(View view) {
-        this.view = view;
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(600, 400)); // Pannello più grande
 
@@ -88,30 +94,18 @@ public class LogInScene extends JPanel {
                     public void actionPerformed(java.awt.event.ActionEvent e) {
                         // Effettua il login
 
-                        try {
-                            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                            // connection = DAOUtils.localMySQLConnection("DesFusion",
-                            // userField.getText(), new String(passField.getPassword()));
-                             connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
-                             userField.getText(), new String(passField.getPassword()));
-                            //connection = DAOUtils.localIniStringConnection();
+                        if (isUserAdmitted(userField.getText(), new String(passField.getPassword()))) {
+                            var connection = doConnection(PDM_USER, PDM_USER);
 
-                        } catch (ClassNotFoundException ex) {
-                            ex.printStackTrace();
-                            JOptionPane.showMessageDialog(null, "Driver SQL Server non trovato.", "Errore",
+                            view.setController(new Controller(new Model(connection), view));
+                            view.goToInitialScene();
+
+                        } else {
+                            JOptionPane.showMessageDialog(LogInScene.this, "Accesso negato.", "Errore",
                                     JOptionPane.ERROR_MESSAGE);
-                        } catch (DAOException ex) {
-                            new ConnectionFailureViewIni();
-                            return;
-                        }
-                        try {
-                            connection.setAutoCommit(false);
-                        } catch (SQLException e1) {
-                            e1.printStackTrace();
+
                         }
 
-                        view.setController(new Controller(new Model(connection), view));
-                        view.goToInitialScene();;
                     }
                 });
 
@@ -145,5 +139,37 @@ public class LogInScene extends JPanel {
         centerPanel.add(Box.createVerticalGlue());
 
         this.add(centerPanel, BorderLayout.CENTER);
+    }
+
+    private boolean isUserAdmitted(String username, String psw) {
+        return Arrays.asList(UserAdmit.values()).stream()
+                .anyMatch(user -> user.getUsername().equals(username) && user.getPsw().equals(psw));
+    }
+
+    private Connection doConnection(String username, String psw) {
+        LOGGER.info("Attempting connection for user: {}", username);
+        try {
+
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            // connection = DAOUtils.localMySQLConnection("DesFusion",
+            // userField.getText(), new String(passField.getPassword()));
+            connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
+                    username, psw);
+            // connection = DAOUtils.localIniStringConnection();
+
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(LogInScene.this, "Driver SQL Server non trovato.", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (DAOException ex) {
+            new ConnectionFailureViewIni();
+        }
+        try {
+            connection.setAutoCommit(false);
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        return connection;
+
     }
 }
