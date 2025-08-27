@@ -33,9 +33,9 @@ public class AddDescriptionScene extends JDialog {
     private JLabel itaLabel = GuiFactory.getLabel("ITA Description:", GuiFactory.getFont(Font.PLAIN, SIZE_FONT));
     private JLabel engLabel = GuiFactory.getLabel("ENG Description:", GuiFactory.getFont(Font.PLAIN, SIZE_FONT));
     private JLabel groupLabel = GuiFactory.getLabel("Group", GuiFactory.getFont(Font.PLAIN, SIZE_FONT));
-    private JTextField itaTextField = GuiFactory.getTextField(20);
-    private JTextField engTextField = GuiFactory.getTextField(20);
-    private JComboBox<String> groupTextField;
+    protected JTextField itaTextField = GuiFactory.getTextField(20);
+    protected JTextField engTextField = GuiFactory.getTextField(20);
+    protected JComboBox<String> groupTextField;
 
     @SuppressWarnings("unused")
     private final View view;

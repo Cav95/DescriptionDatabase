@@ -141,7 +141,18 @@ public class MainTableScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        AddDescriptionScene dialog = new AddDescriptionScene(view);
+                        int selectedRow = table.getSelectedRow();
+                        AddDescriptionScene dialog;
+                        if (selectedRow >= 0) {
+                            String group = (String) table.getValueAt(selectedRow, 0);
+                            String ita = (String) table.getValueAt(selectedRow, 1);
+                            String eng = (String) table.getValueAt(selectedRow, 2);
+
+                            dialog = new AddDescriptionScenePreselect(view, ita, eng, group);
+                        } else {
+                            dialog = new AddDescriptionScene(view);
+                        }
+
                         dialog.setVisible(true);
                     }
                 });
