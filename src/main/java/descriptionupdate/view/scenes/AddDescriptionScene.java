@@ -97,7 +97,7 @@ public class AddDescriptionScene extends JDialog {
                             throw new IllegalArgumentException();
                         } finally {
                             view.getController().setSaved(false); // Mark as not saved
-                            view.getController().initialScene();
+                            view.goToInitialScene();;
                             AddDescriptionScene.this.dispose();
 
                         }
@@ -107,7 +107,7 @@ public class AddDescriptionScene extends JDialog {
         mainPanel.add(GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, Font.getFont(FONT), new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                view.getController().initialScene();
+                view.goToInitialScene();
                 AddDescriptionScene.this.dispose();
             }
         }));

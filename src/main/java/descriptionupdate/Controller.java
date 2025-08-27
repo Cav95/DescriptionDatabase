@@ -60,24 +60,6 @@ public final class Controller {
         this.isSaved = true;
     }
 
-    /**
-     * Sets the controller for the view.
-     *
-     * @param isSaved whether the scene is saved or not
-     */
-    public void initialScene() {
-        LOGGER.info("Initial scene");
-        view.goToInitialScene();
-
-    }
-
-    /**
-     * Navigates to the second scene.
-     */
-    public void secondScene() {
-        LOGGER.info("Second scene");
-        view.goToSecondScene();
-    }
 
     /**
      * Navigates to the add scene.

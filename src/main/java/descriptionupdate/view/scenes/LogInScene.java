@@ -111,7 +111,7 @@ public class LogInScene extends JPanel {
                         }
 
                         view.setController(new Controller(new Model(connection), view));
-                        view.getController().initialScene();
+                        view.goToInitialScene();;
                     }
                 });
 
