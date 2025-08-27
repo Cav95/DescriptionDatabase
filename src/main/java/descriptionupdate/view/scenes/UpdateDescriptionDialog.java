@@ -71,7 +71,7 @@ public class UpdateDescriptionDialog extends JDialog {
                 titleLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
                 titlePannel.add(titleLabel, BorderLayout.CENTER);
 
-                mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+                mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
                 mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
 
                 itaTextField.setText(exIta);

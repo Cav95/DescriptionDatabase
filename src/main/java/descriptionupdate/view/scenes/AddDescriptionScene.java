@@ -64,7 +64,7 @@ public class AddDescriptionScene extends JDialog {
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
 
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
 
         groupTextField = GuiFactory.getComboBox(view.getController().getAllGroupTypeString());
