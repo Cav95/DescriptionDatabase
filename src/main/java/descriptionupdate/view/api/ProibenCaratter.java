@@ -1,4 +1,4 @@
-package descriptionupdate.model.api;
+package descriptionupdate.view.api;
 
 /**
  * Enum representing various prohibited characters.

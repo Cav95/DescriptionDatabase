@@ -1,4 +1,4 @@
-package descriptionupdate.view.utils;
+package descriptionupdate.view.api;
 
 /**
  * Enum representing users who are allowed to admit changes.
