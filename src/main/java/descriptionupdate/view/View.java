@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import descriptionupdate.Controller;
-import descriptionupdate.view.scenes.AddDescriptionScene;
+import descriptionupdate.view.dialog.AddDescriptionDialog;
 import descriptionupdate.view.scenes.LogInScene;
 import descriptionupdate.view.scenes.MainTableScene;
 
@@ -126,7 +126,7 @@ public final class View {
      * Navigates to the add scene of the application.
      */
         public void goToAddScene() {
-        this.mainPanel.add(new AddDescriptionScene(this), ADD_SCENE);
+        this.mainPanel.add(new AddDescriptionDialog(this), ADD_SCENE);
         this.cardLayout.show(this.mainPanel, ADD_SCENE);
     }
 

@@ -4,6 +4,9 @@ import javax.swing.*;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
+import descriptionupdate.view.dialog.AddDescriptionDialog;
+import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
+import descriptionupdate.view.dialog.UpdateDescriptionDialog;
 import descriptionupdate.view.utils.GuiFactory;
 import descriptionupdate.view.utils.SelectionTable;
 
@@ -142,15 +145,15 @@ public class MainTableScene extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int selectedRow = table.getSelectedRow();
-                        AddDescriptionScene dialog;
+                        AddDescriptionDialog dialog;
                         if (selectedRow >= 0) {
                             String group = (String) table.getValueAt(selectedRow, 0);
                             String ita = (String) table.getValueAt(selectedRow, 1);
                             String eng = (String) table.getValueAt(selectedRow, 2);
 
-                            dialog = new AddDescriptionScenePreselect(view, ita, eng, group);
+                            dialog = new AddDescriptionDialogPreselect(view, ita, eng, group);
                         } else {
-                            dialog = new AddDescriptionScene(view);
+                            dialog = new AddDescriptionDialog(view);
                         }
 
                         dialog.setVisible(true);

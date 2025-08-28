@@ -1,8 +1,8 @@
-package descriptionupdate.view.scenes;
+package descriptionupdate.view.dialog;
 
 import descriptionupdate.view.View;
 
-public class AddDescriptionScenePreselect extends AddDescriptionScene {
+public class AddDescriptionDialogPreselect extends AddDescriptionDialog {
 
     private static final long serialVersionUID = 1L;
 
@@ -12,7 +12,7 @@ public class AddDescriptionScenePreselect extends AddDescriptionScene {
      * @param view  the main view of the application
      * @param group the group to preselect in the combo box
      */
-    public AddDescriptionScenePreselect(View view, String ita , String eng, String group) {
+    public AddDescriptionDialogPreselect(View view, String ita , String eng, String group) {
         super(view);
         itaTextField.setText(ita);
         engTextField.setText(eng);

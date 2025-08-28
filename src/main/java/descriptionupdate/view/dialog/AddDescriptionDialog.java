@@ -1,4 +1,4 @@
-package descriptionupdate.view.scenes;
+package descriptionupdate.view.dialog;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
  * AddDescriptionScene class that extends JDialog to allow users to add a new
  * description.
  */
-public class AddDescriptionScene extends JDialog {
+public class AddDescriptionDialog extends JDialog {
 
     private static final int SIZE_FONT = 18;
 
@@ -47,7 +47,7 @@ public class AddDescriptionScene extends JDialog {
      *
      * @param view the main view of the application
      */
-    public AddDescriptionScene(View view) {
+    public AddDescriptionDialog(View view) {
         this.view = view;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -96,12 +96,12 @@ public class AddDescriptionScene extends JDialog {
                             successfullyAddedDescription(newDescription);
                             view.getController().setSaved(false);
                             view.goToInitialScene();
-                            AddDescriptionScene.this.dispose();
+                            AddDescriptionDialog.this.dispose();
                         } catch (IllegalArgumentException t) {
-                            OptionalPaneFactory.caractherInvalid(AddDescriptionScene.this);
+                            OptionalPaneFactory.caractherInvalid(AddDescriptionDialog.this);
 
                         } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(AddDescriptionScene.this,
+                            JOptionPane.showMessageDialog(AddDescriptionDialog.this,
                                     "Errore Descrizione Già Presente ");
                             throw new IllegalArgumentException();
                         }
@@ -112,7 +112,7 @@ public class AddDescriptionScene extends JDialog {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 view.goToInitialScene();
-                AddDescriptionScene.this.dispose();
+                AddDescriptionDialog.this.dispose();
             }
         }));
 
