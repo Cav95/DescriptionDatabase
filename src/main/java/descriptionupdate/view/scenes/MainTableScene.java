@@ -8,6 +8,7 @@ import descriptionupdate.view.dialog.AddDescriptionDialog;
 import descriptionupdate.view.dialog.AddDescriptionDialogPreselect;
 import descriptionupdate.view.dialog.UpdateDescriptionDialog;
 import descriptionupdate.view.utils.GuiFactory;
+import descriptionupdate.view.utils.OptionalPaneFactory;
 import descriptionupdate.view.utils.SelectionTable;
 
 import java.awt.*;
@@ -135,7 +136,7 @@ public class MainTableScene extends JPanel {
         scrollPane.setPreferredSize(new Dimension(400, 200));
         this.add(scrollPane, BorderLayout.CENTER);
 
-        // South: Panel with 4 buttons
+        // South: Buttons panel
 
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
@@ -168,15 +169,17 @@ public class MainTableScene extends JPanel {
                             String group = (String) table.getValueAt(selectedRow, 0);
                             String ita = (String) table.getValueAt(selectedRow, 1);
                             String eng = (String) table.getValueAt(selectedRow, 2);
-                            view.getController().deleteDescription(new Description(ita, eng, group));
-                            view.getController().setSaved(false); // Mark as not saved
-                            var groupFilter = groupTextField.getSelectedItem().toString().toUpperCase();
+                            if (OptionalPaneFactory.askDeleteConfirm(MainTableScene.this,
+                                    ita + " - " + eng + " - " + group).equals(JOptionPane.YES_OPTION)) {
+                                view.getController().deleteDescription(new Description(ita, eng, group));
+                                view.getController().setSaved(false); // Mark as not saved
 
-                            if (groupFilter.isBlank()) {
-                                groupFilter = ALL;
+                                view.goToInitialSceneFiltered(controllBlankReturn(itaTextField),
+                                        controllBlankReturn(engTextField),
+                                        controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
+                                ;
                             }
-                            view.goToInitialSceneFiltered(blankReturn(itaTextField), blankReturn(engTextField),
-                                    groupFilter);
+
                         } else {
                             throw new IllegalStateException("No request selected for management");
                         }
@@ -207,11 +210,9 @@ public class MainTableScene extends JPanel {
                         try {
                             view.getController().save();
                             view.getController().setSaved(true); // Mark as saved after successful save
-                            JOptionPane.showMessageDialog(MainTableScene.this, "Changes saved successfully!");
+                            OptionalPaneFactory.savedSuccessfully(MainTableScene.this);
                         } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(MainTableScene.this,
-                                    "Error saving changes: " + ex.getMessage(),
-                                    "Error", JOptionPane.ERROR_MESSAGE);
+                            OptionalPaneFactory.errorOnSave(MainTableScene.this, ex.getMessage());
                         }
                     }
                 });
@@ -222,21 +223,12 @@ public class MainTableScene extends JPanel {
                         if (view.getController().isSaved()) {
                             view.exitApplication();
                         } else {
-
-                            int response = JOptionPane.showConfirmDialog(
-                                    null,
-                                    "Do you want to save?",
-                                    "Save Confirmation",
-                                    JOptionPane.YES_NO_OPTION);
-                            if (response == JOptionPane.YES_OPTION) {
-                                // User chose to save
+                            if (OptionalPaneFactory.askSaveConfirm(MainTableScene.this)
+                                    .equals(JOptionPane.YES_OPTION)) {
                                 view.getController().save();
-                                JOptionPane.showMessageDialog(MainTableScene.this, "Changes saved successfully!");
+                                OptionalPaneFactory.savedSuccessfully(MainTableScene.this);
                             } else {
-                                // User chose not to save
-                                view.exitApplication();
-                                JOptionPane.showMessageDialog(MainTableScene.this,
-                                        "Changes discarded. Exiting application.");
+                                OptionalPaneFactory.saveDiscarded(MainTableScene.this);
                             }
                             view.exitApplication();
 
@@ -254,14 +246,14 @@ public class MainTableScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        String ita = blankReturn(itaTextField);
-                        String eng = blankReturn(engTextField);
 
-                        String group = groupTextField.getSelectedItem().toString().toUpperCase();
-                        if (group.isBlank()) {
-                            group = ALL;
-                        }
-                        view.goToInitialSceneFiltered(ita, eng, group);
+                        view.getController().setAllFilterTemp(controllBlankReturn(itaTextField),
+                                controllBlankReturn(engTextField),
+                                controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
+
+                        view.goToInitialSceneFiltered(controllBlankReturn(itaTextField),
+                                controllBlankReturn(engTextField),
+                                controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
                     }
                 });
         JButton resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK, Font.getFont(FONT),
@@ -271,6 +263,7 @@ public class MainTableScene extends JPanel {
                         itaTextField.setText("");
                         engTextField.setText("");
                         groupTextField.setSelectedIndex(0);
+                        view.getController().resetFilterTemp();
                         view.getController().setSaved(true);
                         view.goToInitialScene();
                     }
@@ -292,11 +285,15 @@ public class MainTableScene extends JPanel {
         this.add(southPanel, BorderLayout.SOUTH);
     }
 
-    private String blankReturn(JTextField textField) {
+    private String controllBlankReturn(JTextField textField) {
         return textField.getText().isBlank() ? ALL : textField.getText().toUpperCase();
     }
 
     private String reversBlankReturn(String text) {
         return text.equals(ALL) ? "" : text.toUpperCase();
+    }
+
+    private String controllBlankGroup(String group) {
+        return group.isBlank() ? ALL : group;
     }
 }

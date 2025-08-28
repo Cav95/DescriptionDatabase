@@ -6,7 +6,6 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -93,17 +92,16 @@ public class AddDescriptionDialog extends JDialog {
                                 throw new IllegalArgumentException();
                             }
                             view.getController().addDescription(newDescription);
-                            successfullyAddedDescription(newDescription);
+                            OptionalPaneFactory.successfullyAddedDescription(AddDescriptionDialog.this, newDescription);
                             view.getController().setSaved(false);
-                            view.goToInitialScene();
+                            view.goToInitialSceneFiltered(view.getController().getItaFilterTemp(),
+                                    view.getController().getEngFilterTemp(), view.getController().getGroupFilterTemp());
                             AddDescriptionDialog.this.dispose();
                         } catch (IllegalArgumentException t) {
                             OptionalPaneFactory.caractherInvalid(AddDescriptionDialog.this);
 
                         } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(AddDescriptionDialog.this,
-                                    "Errore Descrizione Già Presente ");
-                            throw new IllegalArgumentException();
+                            OptionalPaneFactory.existedDescription(AddDescriptionDialog.this);
                         }
 
                     }
@@ -111,16 +109,11 @@ public class AddDescriptionDialog extends JDialog {
         mainPanel.add(GuiFactory.getButtom("Annulla", Color.RED, Color.WHITE, Font.getFont(FONT), new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                view.goToInitialScene();
+                view.goToInitialSceneFiltered(view.getController().getItaFilterTemp(),
+                                    view.getController().getEngFilterTemp(), view.getController().getGroupFilterTemp());
                 AddDescriptionDialog.this.dispose();
             }
         }));
 
-    }
-
-    private void successfullyAddedDescription(Description description) {
-        JOptionPane.showMessageDialog(this,
-                "Descrizione Aggiunta con Successo\n" + description.itaDescripion() + " - "
-                        + description.engDescription() + " - " + description.group());
     }
 }

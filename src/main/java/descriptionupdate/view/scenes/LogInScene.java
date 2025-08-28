@@ -18,6 +18,7 @@ import descriptionupdate.view.View;
 import descriptionupdate.view.api.UserAdmit;
 import descriptionupdate.view.utils.ConnectionFailureViewIni;
 import descriptionupdate.view.utils.GuiFactory;
+import descriptionupdate.view.utils.OptionalPaneFactory;
 
 /**
  * LogInScene class that extends JPanel to create a login scene for the
@@ -92,7 +93,6 @@ public class LogInScene extends JPanel {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
-                        // Effettua il login
 
                         if (isUserAdmitted(userField.getText(), new String(passField.getPassword()))) {
                             var connection = doConnection(PDM_USER, PDM_USER);
@@ -101,8 +101,7 @@ public class LogInScene extends JPanel {
                             view.goToInitialScene();
 
                         } else {
-                            JOptionPane.showMessageDialog(LogInScene.this, "Accesso negato.", "Errore",
-                                    JOptionPane.ERROR_MESSAGE);
+                            OptionalPaneFactory.denediedAccess(LogInScene.this);
 
                         }
 
@@ -153,14 +152,13 @@ public class LogInScene extends JPanel {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // connection = DAOUtils.localMySQLConnection("DesFusion",
             // userField.getText(), new String(passField.getPassword()));
-            connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
-                    username, psw);
-            // connection = DAOUtils.localIniStringConnection();
+            // connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
+            // username, psw);
+            connection = DAOUtils.localIniStringConnection();
 
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(LogInScene.this, "Driver SQL Server non trovato.", "Errore",
-                    JOptionPane.ERROR_MESSAGE);
+            OptionalPaneFactory.connectionFailed(LogInScene.this);
         } catch (DAOException ex) {
             new ConnectionFailureViewIni();
         }

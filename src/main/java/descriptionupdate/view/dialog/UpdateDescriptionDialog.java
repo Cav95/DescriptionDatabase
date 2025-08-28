@@ -6,7 +6,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -110,17 +109,15 @@ public class UpdateDescriptionDialog extends JDialog {
                             }
                             view.getController().updateDescription(oldDescription,
                                     newDescription);
-                            successfullyAddedDescription(newDescription);
-                            view.getController().setSaved(false); // Mark as not saved
+                            OptionalPaneFactory.successfullyAddedDescription(UpdateDescriptionDialog.this , newDescription);
+                            view.getController().setSaved(false);
                             view.goToInitialScene();
                             UpdateDescriptionDialog.this.dispose();
                         } catch (IllegalArgumentException t) {
                             OptionalPaneFactory.caractherInvalid(UpdateDescriptionDialog.this);
 
                         } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(UpdateDescriptionDialog.this,
-                                    "Errore Descrizione Già Presente "
-                                            + ex.getMessage());
+                            OptionalPaneFactory.existedDescription(UpdateDescriptionDialog.this);
                         }
                     }
 
@@ -128,10 +125,6 @@ public class UpdateDescriptionDialog extends JDialog {
         bottomPanel.add(update);
     }
 
-    private void successfullyAddedDescription(Description description) {
-        JOptionPane.showMessageDialog(this,
-                "Descrizione Aggiunta con Successo\n" + description.itaDescripion() + " - "
-                        + description.engDescription() + " - " + description.group());
-    }
+
 
 }
