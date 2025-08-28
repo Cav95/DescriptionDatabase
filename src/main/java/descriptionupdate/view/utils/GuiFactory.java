@@ -64,8 +64,8 @@ public class GuiFactory {
         return label;
     }
 
-    public static Font getFont(int style, int size) {
-        return new Font(FONT, style, size);
+    public static Font getFont(String style, int size) {
+        return Font.getFont(style, new Font(FONT, Font.PLAIN, size));
     }
 
 }

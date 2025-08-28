@@ -26,6 +26,7 @@ public class MainTableScene extends JPanel {
     private static final String GROUP_TAB_NAME = "GROUP";
     private static final String ALL = "%";
     private static final String FONT = "Roboto";
+    private static final int SIZE_FONT = 13;
 
     private static final long serialVersionUID = 1L;
 
@@ -141,7 +142,7 @@ public class MainTableScene extends JPanel {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         southPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 
-        addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        addButton = GuiFactory.getButtom("Aggiungi", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -160,7 +161,7 @@ public class MainTableScene extends JPanel {
                         dialog.setVisible(true);
                     }
                 });
-        deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, Font.getFont(FONT),
+        deleteButton = GuiFactory.getButtom("Elimina", Color.GREEN, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -256,7 +257,7 @@ public class MainTableScene extends JPanel {
                                 controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
                     }
                 });
-        JButton resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK, Font.getFont(FONT),
+        JButton resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {

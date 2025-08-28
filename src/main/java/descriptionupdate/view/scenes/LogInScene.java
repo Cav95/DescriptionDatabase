@@ -31,6 +31,7 @@ public class LogInScene extends JPanel {
     private static final String PDM_USER = "PDMUser";
 
     private static final String FONT = "Roboto";
+    private static final int SIZE_FONT = 18;
 
     private JPanel northPanel = new JPanel();
     private JPanel centerPanel = new JPanel();
@@ -89,7 +90,7 @@ public class LogInScene extends JPanel {
                 "Accedi",
                 Color.GRAY,
                 Color.BLACK,
-                GuiFactory.getFont(Font.BOLD, 22),
+                GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -108,7 +109,7 @@ public class LogInScene extends JPanel {
                     }
                 });
 
-        JButton exitButton = GuiFactory.getButtom("Exit", Color.GRAY, Color.BLACK, GuiFactory.getFont(Font.BOLD, 22),
+        JButton exitButton = GuiFactory.getButtom("Exit", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -152,9 +153,9 @@ public class LogInScene extends JPanel {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // connection = DAOUtils.localMySQLConnection("DesFusion",
             // userField.getText(), new String(passField.getPassword()));
-             connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
-             username, psw);
-            //connection = DAOUtils.localIniStringConnection();
+            connection = DAOUtils.localSqlServerConnection("EdmDb_2008_001",
+                    username, psw);
+            // connection = DAOUtils.localIniStringConnection();
 
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();

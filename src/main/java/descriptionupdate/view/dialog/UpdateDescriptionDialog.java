@@ -29,6 +29,7 @@ public class UpdateDescriptionDialog extends JDialog {
 
     private static final long serialVersionUID = 1L;
     private static final String FONT = "Roboto";
+    private static final int SIZE_FONT = 13;
 
     private JLabel itaLabel = new JLabel("ITA Description:");
     private JLabel engLabel = new JLabel("ENG Description:");
@@ -92,7 +93,7 @@ public class UpdateDescriptionDialog extends JDialog {
         mainPanel.add(bottomPanel, BorderLayout.EAST);
 
         // Pulsante "Stampa"
-        JButton update = GuiFactory.getButtom("Aggiorna", Color.GRAY, Color.BLACK, Font.getFont(FONT),
+        JButton update = GuiFactory.getButtom("Aggiorna", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override
                     public void actionPerformed(final ActionEvent e) {
