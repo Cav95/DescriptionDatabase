@@ -10,7 +10,7 @@ Application to manage DESCRIZIONEGRUPPI table precompiled Description in local d
 In same fondel with exeguible need to exist configuration file "configDBConnection.ini".
 Inside it input parametre of connection string like immage below.
 
-![Alt text](image.png "Connection")
+![Alt text](.\readme_resources\IniRules.png "Connection")
 
 If you don't need user password can write all in one-line like:
 
