@@ -95,6 +95,8 @@ public class AddDescriptionScene extends JDialog {
                             view.getController().addDescription(newDescription);
                             successfullyAddedDescription(newDescription);
                             view.getController().setSaved(false);
+                            view.goToInitialScene();
+                            AddDescriptionScene.this.dispose();
                         } catch (IllegalArgumentException t) {
                             OptionalPaneFactory.caractherInvalid(AddDescriptionScene.this);
 
