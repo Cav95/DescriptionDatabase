@@ -12,7 +12,9 @@ import javax.swing.JTextField;
 
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
+import descriptionupdate.view.utils.ControllUtilies;
 import descriptionupdate.view.utils.GuiFactory;
+import descriptionupdate.view.utils.OptionalPaneFactory;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -86,16 +88,20 @@ public class AddDescriptionScene extends JDialog {
                             var newDescription = new Description(itaTextField.getText().toUpperCase(),
                                     engTextField.getText().toUpperCase(),
                                     groupTextField.getSelectedItem().toString().toUpperCase());
+                            if (ControllUtilies.isProhibitedCharacter(newDescription.itaDescripion())
+                                    || ControllUtilies.isProhibitedCharacter(newDescription.engDescription())) {
+                                throw new IllegalArgumentException();
+                            }
                             view.getController().addDescription(newDescription);
                             successfullyAddedDescription(newDescription);
+                            view.getController().setSaved(false);
+                        } catch (IllegalArgumentException t) {
+                            OptionalPaneFactory.caractherInvalid(AddDescriptionScene.this);
+
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(AddDescriptionScene.this,
                                     "Errore Descrizione Già Presente ");
                             throw new IllegalArgumentException();
-                        } finally {
-                            view.getController().setSaved(false); // Mark as not saved
-                            view.goToInitialScene();
-                            AddDescriptionScene.this.dispose();
                         }
 
                     }
