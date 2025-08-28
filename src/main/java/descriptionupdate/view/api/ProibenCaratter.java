@@ -17,7 +17,8 @@ public enum ProibenCaratter {
     SQUARE_BRACKET_OPEN("["),
     SQUARE_BRACKET_CLOSE("]"),
     DOLLAR("$"),
-    VIRGOLETTE("\"");
+    QUOTATION_MARK("\""),
+    SEMICOLON(";");
 
     private String character;
 
@@ -27,6 +28,7 @@ public enum ProibenCaratter {
 
     /**
      * Gets the character representation of the enum constant.
+     * 
      * @return The character as a string.
      */
     public String getCharacter() {
