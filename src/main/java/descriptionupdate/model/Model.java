@@ -16,7 +16,7 @@ import descriptionupdate.model.api.Description;
 public final class Model {
 
     private final Connection connection;
-    DescriptionDAO descriptionDAO;
+    private final DescriptionDAO descriptionDAO;
 
     /**
      * Constructor for Model.
@@ -38,8 +38,6 @@ public final class Model {
     public Connection getConnection() {
         return connection;
     }
-
-    // Other model methods can be added here
 
     /**
      * Retrieves a description based on the provided parameters.

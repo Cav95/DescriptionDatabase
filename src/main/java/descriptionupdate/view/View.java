@@ -39,8 +39,6 @@ public final class View {
         this.controller = Optional.empty();
         this.mainFrame = new JFrame("Description Database");
         this.mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        // this.mainFrame.setIconImage(new
-        // ImageIcon(ClassLoader.getSystemResource("images/icon.png")).getImage());
 
         var screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         final var initWidth = (int) (screenSize.width * FRAME_SIZE_FACTOR);
@@ -56,14 +54,6 @@ public final class View {
 
         this.mainFrame.setLocationByPlatform(true);
         this.mainFrame.setVisible(true);
-
-        /*this.mainFrame.addWindowListener(
-                new WindowAdapter() {
-                    public void windowClosing(WindowEvent e) {
-                        onClose.run();
-                        System.exit(0);
-                    }
-                });*/
     }
 
     /**
@@ -93,6 +83,12 @@ public final class View {
         }
     }
 
+    /**
+     * Sets the Controller for this View.
+     *
+     * @param controller the Controller to set
+     * @throws NullPointerException if the provided controller is null
+     */
     public void setController(Controller controller) {
         Objects.requireNonNull(controller, "Set null controller in view");
         this.controller = Optional.of(controller);

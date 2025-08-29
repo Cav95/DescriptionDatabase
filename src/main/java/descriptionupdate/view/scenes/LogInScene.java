@@ -54,8 +54,6 @@ public class LogInScene extends JPanel {
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(600, 400)); // Pannello più grande
 
-        // Titolo dell'applicazione in alto
-
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(40, 20, 20, 20));
 
@@ -64,13 +62,9 @@ public class LogInScene extends JPanel {
         northPanel.add(titleLabel);
         this.add(northPanel, BorderLayout.NORTH);
 
-        // Pulsante e campi centrati
-
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setBorder(BorderFactory.createEmptyBorder(60, 20, 60, 20));
         centerPanel.setOpaque(false);
-
-        // Label e campo utente
 
         userLabel.setFont(new Font(FONT, Font.PLAIN, 18));
         userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -78,7 +72,6 @@ public class LogInScene extends JPanel {
         userField.setMaximumSize(new Dimension(300, 30));
         userField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Label e campo password
 
         passLabel.setFont(new Font(FONT, Font.PLAIN, 18));
         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -117,8 +110,6 @@ public class LogInScene extends JPanel {
                     }
                 });
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        // Pulsanti allineati orizzontalmente
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);

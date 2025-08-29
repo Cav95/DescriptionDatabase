@@ -63,7 +63,6 @@ public class MainTableScene extends JPanel {
      */
     public MainTableScene(View view) {
         this.view = view;
-        // this.isSaved = isSaved; // Initialize as saved
         this.itaDescription = ALL;
         this.engDescription = ALL;
         this.group = ALL;

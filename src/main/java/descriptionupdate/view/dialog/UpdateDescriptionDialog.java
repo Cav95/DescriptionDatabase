@@ -88,12 +88,9 @@ public class UpdateDescriptionDialog extends JDialog {
 
         this.add(mainPanel, BorderLayout.CENTER);
 
-        // Correggi il nome del pannello
-
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
         mainPanel.add(bottomPanel, BorderLayout.EAST);
 
-        // Pulsante "Stampa"
         JButton update = GuiFactory.getButtom("Aggiorna", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
                 new ActionListener() {
                     @Override

@@ -22,6 +22,11 @@ public enum ProibenCaratter {
 
     private String character;
 
+    /**
+     * Constructor for ProibenCaratter enum.
+     * 
+     * @param character The character representation of the enum constant.
+     */
     ProibenCaratter(String character) {
         this.character = character;
     }
