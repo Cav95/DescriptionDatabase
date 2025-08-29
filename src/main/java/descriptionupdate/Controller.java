@@ -147,7 +147,7 @@ public final class Controller {
      */
     public void addDescription(final Description description) {
         LOGGER.info("Adding description: {}", description);
-        if (checkExistentAndAdded(description)) {
+        if (checkExistent(description)) {
             model.addDescription(description);
         } else {
             throw new ExistentDescriptionException("Description already exists");
@@ -166,7 +166,7 @@ public final class Controller {
 
     public void updateDescription(final Description oldDescription, final Description newDescription) {
         LOGGER.info("Updating description from: {}, {}, {} to: {}, {}, {}", oldDescription, newDescription);
-        if (checkExistentAndAdded(newDescription)) {
+        if (checkExistent(newDescription)) {
             model.updateDescription(oldDescription, newDescription);
         } else {
             throw new ExistentDescriptionException("Description already exists");
@@ -192,12 +192,17 @@ public final class Controller {
         return model.getAllGroupTypeString();
     }
 
-    public boolean checkExistentAndAdded(Description des) {
+    /**
+     * Checks if a description already exists in the model.
+     *
+     * @param des the description to check.
+     * @return true if the description exists, false otherwise.
+     */
+    public boolean checkExistent(Description des) {
         try {
             getDescription(des.itaDescripion(), des.engDescription(), des.group());
             return false;
         } catch (IllegalArgumentException e) {
-            addDescription(des);
             return true;
         }
     }
