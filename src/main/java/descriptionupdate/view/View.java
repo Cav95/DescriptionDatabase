@@ -112,8 +112,10 @@ public final class View {
      * @param engDescription the English description filter
      * @param group         the group filter
      */
-        public void goToInitialSceneFiltered(String itaDescription, String engDescription, String group) {
-        this.mainPanel.add(new MainTableScene(this ,itaDescription , engDescription ,group ), SN_WELCOME);
+        public void goToInitialSceneFiltered() {
+        this.mainPanel.add(new MainTableScene(this ,getController().getItaFilterTemp(),
+                                    getController().getEngFilterTemp(),
+                                    getController().getGroupFilterTemp()), SN_WELCOME);
         this.cardLayout.show(this.mainPanel, SN_WELCOME);
     }
     /**

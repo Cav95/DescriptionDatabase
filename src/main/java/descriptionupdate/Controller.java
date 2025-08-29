@@ -24,8 +24,6 @@ public final class Controller {
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(Controller.class);
 
     private final Model model;
-    private final View view;
-
     private boolean isSaved;
 
     private String itaFilterTemp = "%";
@@ -96,17 +94,8 @@ public final class Controller {
     public Controller(final Model model, final View view) {
         Objects.requireNonNull(model, "Controller created with null model");
         Objects.requireNonNull(view, "Controller created with null view");
-        this.view = view;
         this.model = model;
         this.isSaved = true;
-    }
-
-    /**
-     * Navigates to the add scene.
-     */
-    public void addScene() {
-        LOGGER.info("Add scene");
-        view.goToAddScene();
     }
 
     /**
@@ -179,7 +168,6 @@ public final class Controller {
     public void save() {
         LOGGER.info("Saving changes to the database");
         model.save();
-        view.goToInitialScene(); // Navigate to the main table scene after saving
     }
 
     /**

@@ -94,9 +94,7 @@ public class AddDescriptionDialog extends JDialog {
                                     OptionalPaneFactory.successfullyAddedDescription(AddDescriptionDialog.this,
                                             newDescription);
                                     view.getController().setSaved(false);
-                                    view.goToInitialSceneFiltered(view.getController().getItaFilterTemp(),
-                                            view.getController().getEngFilterTemp(),
-                                            view.getController().getGroupFilterTemp());
+                                    view.goToInitialSceneFiltered();
                                     AddDescriptionDialog.this.dispose();
                                 } catch (IllegalArgumentException t) {
                                     OptionalPaneFactory.caractherInvalid(AddDescriptionDialog.this);
@@ -115,8 +113,7 @@ public class AddDescriptionDialog extends JDialog {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent e) {
-                        view.goToInitialSceneFiltered(view.getController().getItaFilterTemp(),
-                                view.getController().getEngFilterTemp(), view.getController().getGroupFilterTemp());
+                        view.goToInitialSceneFiltered();
                         AddDescriptionDialog.this.dispose();
                     }
                 }));

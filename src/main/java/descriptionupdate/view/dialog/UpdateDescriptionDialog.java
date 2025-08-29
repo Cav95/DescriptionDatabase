@@ -111,7 +111,7 @@ public class UpdateDescriptionDialog extends JDialog {
                             OptionalPaneFactory.successfullyAddedDescription(UpdateDescriptionDialog.this,
                                     newDescription);
                             view.getController().setSaved(false);
-                            view.goToInitialScene();
+                            view.goToInitialSceneFiltered();
                             UpdateDescriptionDialog.this.dispose();
                         } catch (IllegalArgumentException t) {
                             OptionalPaneFactory.caractherInvalid(UpdateDescriptionDialog.this);

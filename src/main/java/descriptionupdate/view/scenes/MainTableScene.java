@@ -175,9 +175,7 @@ public class MainTableScene extends JPanel {
                                 view.getController().deleteDescription(new Description(ita, eng, group));
                                 view.getController().setSaved(false); // Mark as not saved
 
-                                view.goToInitialSceneFiltered(controllBlankReturn(itaTextField),
-                                        controllBlankReturn(engTextField),
-                                        controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
+                                view.goToInitialSceneFiltered();
                                 ;
                             }
 
@@ -252,9 +250,7 @@ public class MainTableScene extends JPanel {
                                 controllBlankReturn(engTextField),
                                 controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
 
-                        view.goToInitialSceneFiltered(controllBlankReturn(itaTextField),
-                                controllBlankReturn(engTextField),
-                                controllBlankGroup(groupTextField.getSelectedItem().toString().toUpperCase()));
+                        view.goToInitialSceneFiltered();
                     }
                 });
         JButton resetButton = GuiFactory.getButtom("Reset Filtro", Color.GRAY, Color.BLACK, GuiFactory.getFont(FONT, SIZE_FONT),
