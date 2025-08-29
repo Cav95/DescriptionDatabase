@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import descriptionupdate.model.Model;
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
+import descriptionupdate.view.utils.ExistentDescriptionException;
 
 /**
  * Controller class that manages the interaction between the model and the view.
@@ -65,7 +66,7 @@ public final class Controller {
         setItaFilterTemp("%");
         setEngFilterTemp("%");
         setGroupFilterTemp("%");
-    }   
+    }
 
     /**
      * Indicates whether the current scene is saved or not.
@@ -146,7 +147,11 @@ public final class Controller {
      */
     public void addDescription(final Description description) {
         LOGGER.info("Adding description: {}", description);
-        model.addDescription(description);
+        if (checkExistentAndAdded(description)) {
+            model.addDescription(description);
+        } else {
+            throw new ExistentDescriptionException("Description already exists");
+        }
     }
 
     /**
@@ -161,7 +166,11 @@ public final class Controller {
 
     public void updateDescription(final Description oldDescription, final Description newDescription) {
         LOGGER.info("Updating description from: {}, {}, {} to: {}, {}, {}", oldDescription, newDescription);
-        model.updateDescription(oldDescription, newDescription);
+        if (checkExistentAndAdded(newDescription)) {
+            model.updateDescription(oldDescription, newDescription);
+        } else {
+            throw new ExistentDescriptionException("Description already exists");
+        }
     }
 
     /**
@@ -181,5 +190,15 @@ public final class Controller {
     public List<String> getAllGroupTypeString() {
         LOGGER.info("Getting all group types");
         return model.getAllGroupTypeString();
+    }
+
+    public boolean checkExistentAndAdded(Description des) {
+        try {
+            getDescription(des.itaDescripion(), des.engDescription(), des.group());
+            return false;
+        } catch (IllegalArgumentException e) {
+            addDescription(des);
+            return true;
+        }
     }
 }

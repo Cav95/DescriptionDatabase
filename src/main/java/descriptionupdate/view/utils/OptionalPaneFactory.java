@@ -116,6 +116,12 @@ public class OptionalPaneFactory {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    public static void generiError(Component dialog) {
+        JOptionPane.showMessageDialog(dialog,
+                "Errore generico", "Errore",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
     private OptionalPaneFactory() {
         // Prevent instantiation
     }

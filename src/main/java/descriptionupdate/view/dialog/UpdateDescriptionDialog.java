@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
 import descriptionupdate.view.utils.ControllUtilies;
+import descriptionupdate.view.utils.ExistentDescriptionException;
 import descriptionupdate.view.utils.GuiFactory;
 import descriptionupdate.view.utils.OptionalPaneFactory;
 
@@ -104,28 +105,25 @@ public class UpdateDescriptionDialog extends JDialog {
                                     engTextField.getText().toUpperCase(), exGroup);
                             var oldDescription = new Description(exIta, exEng, exGroup);
 
-                            if (ControllUtilies.isProhibitedCharacter(newDescription.itaDescripion())
-                                    || ControllUtilies.isProhibitedCharacter(newDescription.engDescription())) {
-                                throw new IllegalArgumentException();
-                            }
+                            ControllUtilies.descriptionValidCaracter(newDescription);
                             view.getController().updateDescription(oldDescription,
                                     newDescription);
-                            OptionalPaneFactory.successfullyAddedDescription(UpdateDescriptionDialog.this , newDescription);
+                            OptionalPaneFactory.successfullyAddedDescription(UpdateDescriptionDialog.this,
+                                    newDescription);
                             view.getController().setSaved(false);
                             view.goToInitialScene();
                             UpdateDescriptionDialog.this.dispose();
                         } catch (IllegalArgumentException t) {
                             OptionalPaneFactory.caractherInvalid(UpdateDescriptionDialog.this);
-
-                        } catch (Exception ex) {
+                        } catch (ExistentDescriptionException o) {
                             OptionalPaneFactory.existedDescription(UpdateDescriptionDialog.this);
+                        } catch (Exception ex) {
+                            OptionalPaneFactory.generiError(UpdateDescriptionDialog.this);
                         }
                     }
 
                 });
         bottomPanel.add(update);
     }
-
-
 
 }

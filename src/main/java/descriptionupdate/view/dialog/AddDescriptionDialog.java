@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import descriptionupdate.model.api.Description;
 import descriptionupdate.view.View;
 import descriptionupdate.view.utils.ControllUtilies;
+import descriptionupdate.view.utils.ExistentDescriptionException;
 import descriptionupdate.view.utils.GuiFactory;
 import descriptionupdate.view.utils.OptionalPaneFactory;
 
@@ -88,10 +89,7 @@ public class AddDescriptionDialog extends JDialog {
                                     var newDescription = new Description(itaTextField.getText().toUpperCase(),
                                             engTextField.getText().toUpperCase(),
                                             groupTextField.getSelectedItem().toString().toUpperCase());
-                                    if (ControllUtilies.isProhibitedCharacter(newDescription.itaDescripion())
-                                            || ControllUtilies.isProhibitedCharacter(newDescription.engDescription())) {
-                                        throw new IllegalArgumentException();
-                                    }
+                                    ControllUtilies.descriptionValidCaracter(newDescription);
                                     view.getController().addDescription(newDescription);
                                     OptionalPaneFactory.successfullyAddedDescription(AddDescriptionDialog.this,
                                             newDescription);
@@ -102,9 +100,13 @@ public class AddDescriptionDialog extends JDialog {
                                     AddDescriptionDialog.this.dispose();
                                 } catch (IllegalArgumentException t) {
                                     OptionalPaneFactory.caractherInvalid(AddDescriptionDialog.this);
-
-                                } catch (Exception ex) {
+                                } catch (ExistentDescriptionException o) {
                                     OptionalPaneFactory.existedDescription(AddDescriptionDialog.this);
+                                }
+
+                        catch (Exception ex) {
+                                    OptionalPaneFactory.generiError(AddDescriptionDialog.this);
+
                                 }
 
                             }
